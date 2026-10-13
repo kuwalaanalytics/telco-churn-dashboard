@@ -1,0 +1,155 @@
+{
+  "rows": 7043,
+  "columns": 21,
+  "dtypes": {
+    "customerID": "str",
+    "gender": "str",
+    "SeniorCitizen": "int64",
+    "Partner": "str",
+    "Dependents": "str",
+    "tenure": "int64",
+    "PhoneService": "str",
+    "MultipleLines": "str",
+    "InternetService": "str",
+    "OnlineSecurity": "str",
+    "OnlineBackup": "str",
+    "DeviceProtection": "str",
+    "TechSupport": "str",
+    "StreamingTV": "str",
+    "StreamingMovies": "str",
+    "Contract": "str",
+    "PaperlessBilling": "str",
+    "PaymentMethod": "str",
+    "MonthlyCharges": "float64",
+    "TotalCharges": "str",
+    "Churn": "str"
+  },
+  "nulls": {},
+  "blank_strings": {
+    "TotalCharges": 11
+  },
+  "duplicate_rows": 0,
+  "duplicate_customer_ids": 0,
+  "unique_values": {
+    "gender": [
+      "Female",
+      "Male"
+    ],
+    "SeniorCitizen": [
+      "0",
+      "1"
+    ],
+    "Partner": [
+      "No",
+      "Yes"
+    ],
+    "Dependents": [
+      "No",
+      "Yes"
+    ],
+    "PhoneService": [
+      "No",
+      "Yes"
+    ],
+    "MultipleLines": [
+      "No",
+      "No phone service",
+      "Yes"
+    ],
+    "InternetService": [
+      "DSL",
+      "Fiber optic",
+      "No"
+    ],
+    "OnlineSecurity": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "OnlineBackup": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "DeviceProtection": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "TechSupport": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingTV": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingMovies": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Contract": [
+      "Month-to-month",
+      "One year",
+      "Two year"
+    ],
+    "PaperlessBilling": [
+      "No",
+      "Yes"
+    ],
+    "PaymentMethod": [
+      "Bank transfer (automatic)",
+      "Credit card (automatic)",
+      "Electronic check",
+      "Mailed check"
+    ],
+    "Churn": [
+      "No",
+      "Yes"
+    ]
+  },
+  "cleaning_log": [
+    "TotalCharges converted from text to number. 11 blank values found; all have tenure 0 (True), meaning new customers not yet billed, so they were set to 0 rather than dropped.",
+    "SeniorCitizen recoded from 0/1 to No/Yes to match the other Yes/No columns.",
+    "ChurnFlag added (1 = churned, 0 = stayed) for calculations.",
+    "Duplicate customer IDs removed: 0.",
+    "TenureBand: 0-6, 7-12, 13-24, 25-48, 49-72 months.",
+    "MonthlyChargeBand: under $30, $30-49, $50-69, $70-89, $90+.",
+    "NumServices: count of phone, multiple lines, internet and the six add-ons (0 to 9).",
+    "NumAddOns / NoAddOns: add-ons are online security, online backup, device protection, tech support, streaming TV and streaming movies. Customers without internet cannot buy these, so add-on comparisons are made among internet customers only."
+  ],
+  "clean_rows": 7043,
+  "clean_columns": [
+    "customerID",
+    "gender",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "tenure",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod",
+    "MonthlyCharges",
+    "TotalCharges",
+    "Churn",
+    "ChurnFlag",
+    "TenureBand",
+    "MonthlyChargeBand",
+    "HasInternet",
+    "NumAddOns",
+    "NumServices",
+    "NoAddOns"
+  ]
+}

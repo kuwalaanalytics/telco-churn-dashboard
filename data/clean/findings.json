@@ -1,0 +1,821 @@
+{
+  "overall": {
+    "customers": 7043,
+    "churned": 1869,
+    "churn_rate": 0.2653698707936959,
+    "retention_rate": 0.7346301292063041,
+    "avg_monthly": 64.76169246059918,
+    "avg_tenure": 32.37114865824223,
+    "total_monthly_revenue": 456116.6,
+    "monthly_revenue_lost": 139130.85,
+    "share_revenue_lost": 0.3050335155528214,
+    "annualised_revenue_lost": 1669570.2000000002,
+    "avg_monthly_churned": 74.44133226324237,
+    "avg_monthly_stayed": 61.26512369540008,
+    "median_tenure_churned": 10.0,
+    "median_tenure_stayed": 38.0,
+    "clv": 2096.4103740014207,
+    "avg_total_charges": 2279.7343035638223
+  },
+  "breakdowns": {
+    "Contract": [
+      {
+        "group": "Month-to-month",
+        "customers": 3875,
+        "churned": 1655,
+        "churn_rate": 0.4271,
+        "avg_monthly": 66.3985,
+        "monthly_revenue": 257294.15,
+        "revenue_lost": 120847.1
+      },
+      {
+        "group": "One year",
+        "customers": 1473,
+        "churned": 166,
+        "churn_rate": 0.1127,
+        "avg_monthly": 65.0486,
+        "monthly_revenue": 95816.6,
+        "revenue_lost": 14118.45
+      },
+      {
+        "group": "Two year",
+        "customers": 1695,
+        "churned": 48,
+        "churn_rate": 0.0283,
+        "avg_monthly": 60.7704,
+        "monthly_revenue": 103005.85,
+        "revenue_lost": 4165.3
+      }
+    ],
+    "TenureBand": [
+      {
+        "group": "0-6 months",
+        "customers": 1481,
+        "churned": 784,
+        "churn_rate": 0.5294,
+        "avg_monthly": 54.7387,
+        "monthly_revenue": 81067.95,
+        "revenue_lost": 49896.1
+      },
+      {
+        "group": "13-24 months",
+        "customers": 1024,
+        "churned": 294,
+        "churn_rate": 0.2871,
+        "avg_monthly": 61.3573,
+        "monthly_revenue": 62829.85,
+        "revenue_lost": 23081.65
+      },
+      {
+        "group": "25-48 months",
+        "customers": 1594,
+        "churned": 325,
+        "churn_rate": 0.2039,
+        "avg_monthly": 65.9306,
+        "monthly_revenue": 105093.3,
+        "revenue_lost": 27462.5
+      },
+      {
+        "group": "49-72 months",
+        "customers": 2239,
+        "churned": 213,
+        "churn_rate": 0.0951,
+        "avg_monthly": 73.9454,
+        "monthly_revenue": 165563.7,
+        "revenue_lost": 19632.45
+      },
+      {
+        "group": "7-12 months",
+        "customers": 705,
+        "churned": 253,
+        "churn_rate": 0.3589,
+        "avg_monthly": 58.9529,
+        "monthly_revenue": 41561.8,
+        "revenue_lost": 19058.15
+      }
+    ],
+    "PaymentMethod": [
+      {
+        "group": "Bank transfer (automatic)",
+        "customers": 1544,
+        "churned": 258,
+        "churn_rate": 0.1671,
+        "avg_monthly": 67.1926,
+        "monthly_revenue": 103745.45,
+        "revenue_lost": 20091.9
+      },
+      {
+        "group": "Credit card (automatic)",
+        "customers": 1522,
+        "churned": 232,
+        "churn_rate": 0.1524,
+        "avg_monthly": 66.5124,
+        "monthly_revenue": 101231.85,
+        "revenue_lost": 17946.6
+      },
+      {
+        "group": "Electronic check",
+        "customers": 2365,
+        "churned": 1071,
+        "churn_rate": 0.4529,
+        "avg_monthly": 76.2558,
+        "monthly_revenue": 180345.0,
+        "revenue_lost": 84288.75
+      },
+      {
+        "group": "Mailed check",
+        "customers": 1612,
+        "churned": 308,
+        "churn_rate": 0.1911,
+        "avg_monthly": 43.9171,
+        "monthly_revenue": 70794.3,
+        "revenue_lost": 16803.6
+      }
+    ],
+    "InternetService": [
+      {
+        "group": "DSL",
+        "customers": 2421,
+        "churned": 459,
+        "churn_rate": 0.1896,
+        "avg_monthly": 58.1022,
+        "monthly_revenue": 140665.35,
+        "revenue_lost": 22529.2
+      },
+      {
+        "group": "Fiber optic",
+        "customers": 3096,
+        "churned": 1297,
+        "churn_rate": 0.4189,
+        "avg_monthly": 91.5001,
+        "monthly_revenue": 283284.4,
+        "revenue_lost": 114300.05
+      },
+      {
+        "group": "No",
+        "customers": 1526,
+        "churned": 113,
+        "churn_rate": 0.074,
+        "avg_monthly": 21.0792,
+        "monthly_revenue": 32166.85,
+        "revenue_lost": 2301.6
+      }
+    ],
+    "PaperlessBilling": [
+      {
+        "group": "No",
+        "customers": 2872,
+        "churned": 469,
+        "churn_rate": 0.1633,
+        "avg_monthly": 51.993,
+        "monthly_revenue": 149323.8,
+        "revenue_lost": 29620.85
+      },
+      {
+        "group": "Yes",
+        "customers": 4171,
+        "churned": 1400,
+        "churn_rate": 0.3357,
+        "avg_monthly": 73.5538,
+        "monthly_revenue": 306792.8,
+        "revenue_lost": 109510.0
+      }
+    ],
+    "MonthlyChargeBand": [
+      {
+        "group": "$30-49",
+        "customers": 641,
+        "churned": 199,
+        "churn_rate": 0.3105,
+        "avg_monthly": 42.7375,
+        "monthly_revenue": 27394.75,
+        "revenue_lost": 8527.15
+      },
+      {
+        "group": "$50-69",
+        "customers": 1158,
+        "churned": 234,
+        "churn_rate": 0.2021,
+        "avg_monthly": 59.8568,
+        "monthly_revenue": 69314.2,
+        "revenue_lost": 14038.95
+      },
+      {
+        "group": "$70-89",
+        "customers": 1847,
+        "churned": 701,
+        "churn_rate": 0.3795,
+        "avg_monthly": 79.9896,
+        "monthly_revenue": 147740.8,
+        "revenue_lost": 55926.9
+      },
+      {
+        "group": "$90+",
+        "customers": 1744,
+        "churned": 573,
+        "churn_rate": 0.3286,
+        "avg_monthly": 100.9871,
+        "monthly_revenue": 176121.5,
+        "revenue_lost": 57054.1
+      },
+      {
+        "group": "Under $30",
+        "customers": 1653,
+        "churned": 162,
+        "churn_rate": 0.098,
+        "avg_monthly": 21.5035,
+        "monthly_revenue": 35545.35,
+        "revenue_lost": 3583.75
+      }
+    ],
+    "gender": [
+      {
+        "group": "Female",
+        "customers": 3488,
+        "churned": 939,
+        "churn_rate": 0.2692,
+        "avg_monthly": 65.2042,
+        "monthly_revenue": 227432.4,
+        "revenue_lost": 70248.55
+      },
+      {
+        "group": "Male",
+        "customers": 3555,
+        "churned": 930,
+        "churn_rate": 0.2616,
+        "avg_monthly": 64.3275,
+        "monthly_revenue": 228684.2,
+        "revenue_lost": 68882.3
+      }
+    ],
+    "SeniorCitizen": [
+      {
+        "group": "No",
+        "customers": 5901,
+        "churned": 1393,
+        "churn_rate": 0.2361,
+        "avg_monthly": 61.8474,
+        "monthly_revenue": 364961.75,
+        "revenue_lost": 100711.25
+      },
+      {
+        "group": "Yes",
+        "customers": 1142,
+        "churned": 476,
+        "churn_rate": 0.4168,
+        "avg_monthly": 79.8204,
+        "monthly_revenue": 91154.85,
+        "revenue_lost": 38419.6
+      }
+    ],
+    "Partner": [
+      {
+        "group": "No",
+        "customers": 3641,
+        "churned": 1200,
+        "churn_rate": 0.3296,
+        "avg_monthly": 61.945,
+        "monthly_revenue": 225541.75,
+        "revenue_lost": 85741.15
+      },
+      {
+        "group": "Yes",
+        "customers": 3402,
+        "churned": 669,
+        "churn_rate": 0.1966,
+        "avg_monthly": 67.7763,
+        "monthly_revenue": 230574.85,
+        "revenue_lost": 53389.7
+      }
+    ],
+    "Dependents": [
+      {
+        "group": "No",
+        "customers": 4933,
+        "churned": 1543,
+        "churn_rate": 0.3128,
+        "avg_monthly": 67.0028,
+        "monthly_revenue": 330524.85,
+        "revenue_lost": 115376.5
+      },
+      {
+        "group": "Yes",
+        "customers": 2110,
+        "churned": 326,
+        "churn_rate": 0.1545,
+        "avg_monthly": 59.5222,
+        "monthly_revenue": 125591.75,
+        "revenue_lost": 23754.35
+      }
+    ],
+    "NumAddOns": [
+      {
+        "group": "0",
+        "customers": 2219,
+        "churned": 475,
+        "churn_rate": 0.2141,
+        "avg_monthly": 32.7929,
+        "monthly_revenue": 72767.45,
+        "revenue_lost": 24516.85
+      },
+      {
+        "group": "1",
+        "customers": 966,
+        "churned": 442,
+        "churn_rate": 0.4576,
+        "avg_monthly": 65.5743,
+        "monthly_revenue": 63344.75,
+        "revenue_lost": 30805.55
+      },
+      {
+        "group": "2",
+        "customers": 1033,
+        "churned": 370,
+        "churn_rate": 0.3582,
+        "avg_monthly": 72.4175,
+        "monthly_revenue": 74807.25,
+        "revenue_lost": 29476.2
+      },
+      {
+        "group": "3",
+        "customers": 1118,
+        "churned": 306,
+        "churn_rate": 0.2737,
+        "avg_monthly": 80.1105,
+        "monthly_revenue": 89563.55,
+        "revenue_lost": 27134.8
+      },
+      {
+        "group": "4",
+        "customers": 852,
+        "churned": 190,
+        "churn_rate": 0.223,
+        "avg_monthly": 87.7715,
+        "monthly_revenue": 74781.35,
+        "revenue_lost": 18364.3
+      },
+      {
+        "group": "5",
+        "customers": 571,
+        "churned": 71,
+        "churn_rate": 0.1243,
+        "avg_monthly": 92.176,
+        "monthly_revenue": 52632.5,
+        "revenue_lost": 7169.55
+      },
+      {
+        "group": "6",
+        "customers": 284,
+        "churned": 15,
+        "churn_rate": 0.0528,
+        "avg_monthly": 99.3653,
+        "monthly_revenue": 28219.75,
+        "revenue_lost": 1663.6
+      }
+    ]
+  },
+  "services": [
+    {
+      "service": "OnlineSecurity",
+      "adoption": 0.36595976073953235,
+      "churn_with": 0.14611193660227836,
+      "churn_without": 0.4176672384219554,
+      "customers_with": 2019,
+      "customers_without": 3498
+    },
+    {
+      "service": "TechSupport",
+      "adoption": 0.37049120899039334,
+      "churn_with": 0.15166340508806261,
+      "churn_without": 0.4163547365390153,
+      "customers_with": 2044,
+      "customers_without": 3473
+    },
+    {
+      "service": "OnlineBackup",
+      "adoption": 0.44027551205365234,
+      "churn_with": 0.21531494442157267,
+      "churn_without": 0.39928756476683935,
+      "customers_with": 2429,
+      "customers_without": 3088
+    },
+    {
+      "service": "DeviceProtection",
+      "adoption": 0.4390067065434113,
+      "churn_with": 0.2250206440957886,
+      "churn_without": 0.3912762520193861,
+      "customers_with": 2422,
+      "customers_without": 3095
+    },
+    {
+      "service": "StreamingMovies",
+      "adoption": 0.49519666485408737,
+      "churn_with": 0.29941434846266474,
+      "churn_without": 0.33680430879712747,
+      "customers_with": 2732,
+      "customers_without": 2785
+    },
+    {
+      "service": "StreamingTV",
+      "adoption": 0.4906652166032264,
+      "churn_with": 0.30070188400443293,
+      "churn_without": 0.33523131672597867,
+      "customers_with": 2707,
+      "customers_without": 2810
+    }
+  ],
+  "addons_internet": [
+    {
+      "group": "0",
+      "customers": 693,
+      "churned": 362,
+      "churn_rate": 0.5224,
+      "avg_monthly": 58.5867,
+      "monthly_revenue": 40600.6,
+      "revenue_lost": 22215.25
+    },
+    {
+      "group": "1",
+      "customers": 966,
+      "churned": 442,
+      "churn_rate": 0.4576,
+      "avg_monthly": 65.5743,
+      "monthly_revenue": 63344.75,
+      "revenue_lost": 30805.55
+    },
+    {
+      "group": "2",
+      "customers": 1033,
+      "churned": 370,
+      "churn_rate": 0.3582,
+      "avg_monthly": 72.4175,
+      "monthly_revenue": 74807.25,
+      "revenue_lost": 29476.2
+    },
+    {
+      "group": "3",
+      "customers": 1118,
+      "churned": 306,
+      "churn_rate": 0.2737,
+      "avg_monthly": 80.1105,
+      "monthly_revenue": 89563.55,
+      "revenue_lost": 27134.8
+    },
+    {
+      "group": "4",
+      "customers": 852,
+      "churned": 190,
+      "churn_rate": 0.223,
+      "avg_monthly": 87.7715,
+      "monthly_revenue": 74781.35,
+      "revenue_lost": 18364.3
+    },
+    {
+      "group": "5",
+      "customers": 571,
+      "churned": 71,
+      "churn_rate": 0.1243,
+      "avg_monthly": 92.176,
+      "monthly_revenue": 52632.5,
+      "revenue_lost": 7169.55
+    },
+    {
+      "group": "6",
+      "customers": 284,
+      "churned": 15,
+      "churn_rate": 0.0528,
+      "avg_monthly": 99.3653,
+      "monthly_revenue": 28219.75,
+      "revenue_lost": 1663.6
+    }
+  ],
+  "no_addons_internet": {
+    "customers": 693,
+    "churn_no_addons": 0.5223665223665224,
+    "churn_some_addons": 0.28897180762852404
+  },
+  "segments": [
+    {
+      "group": "New and Uncommitted",
+      "customers": 1994,
+      "churned": 1024,
+      "churn_rate": 0.5135,
+      "avg_monthly": 58.2179,
+      "monthly_revenue": 116086.5,
+      "revenue_lost": 68301.45,
+      "rule": "Month-to-month contract, 12 months or less with the company",
+      "share_customers": 0.28311798949311373,
+      "share_churners": 0.5478865703584804,
+      "avg_tenure": 4.474924774322969,
+      "avg_total_charges": 276.6934302908726
+    },
+    {
+      "group": "Fibre Flight Risks",
+      "customers": 1212,
+      "churned": 519,
+      "churn_rate": 0.4282,
+      "avg_monthly": 90.7574,
+      "monthly_revenue": 109997.95,
+      "revenue_lost": 47303.7,
+      "rule": "Month-to-month contract, over 12 months tenure, fibre optic internet",
+      "share_customers": 0.17208575890955558,
+      "share_churners": 0.27768860353130015,
+      "avg_tenure": 34.23597359735974,
+      "avg_total_charges": 3154.414521452145
+    },
+    {
+      "group": "Settled Month-to-Month",
+      "customers": 669,
+      "churned": 112,
+      "churn_rate": 0.1674,
+      "avg_monthly": 46.6513,
+      "monthly_revenue": 31209.7,
+      "revenue_lost": 5241.95,
+      "rule": "Month-to-month contract, over 12 months tenure, DSL or no internet",
+      "share_customers": 0.0949879312792844,
+      "share_churners": 0.0599250936329588,
+      "avg_tenure": 29.110612855007474,
+      "avg_total_charges": 1391.6059790732436
+    },
+    {
+      "group": "Loyal High-Value",
+      "customers": 1487,
+      "churned": 163,
+      "churn_rate": 0.1096,
+      "avg_monthly": 94.0467,
+      "monthly_revenue": 139847.5,
+      "revenue_lost": 15984.2,
+      "rule": "One or two year contract, paying $70 or more per month",
+      "share_customers": 0.21113162004827488,
+      "share_churners": 0.08721241305510968,
+      "avg_tenure": 57.21721587088097,
+      "avg_total_charges": 5438.736449226631
+    },
+    {
+      "group": "Committed Essentials",
+      "customers": 1681,
+      "churned": 51,
+      "churn_rate": 0.0303,
+      "avg_monthly": 35.0833,
+      "monthly_revenue": 58974.95,
+      "revenue_lost": 2299.55,
+      "rule": "One or two year contract, paying under $70 per month",
+      "share_customers": 0.2386767002697714,
+      "share_churners": 0.027287319422150885,
+      "avg_tenure": 43.4360499702558,
+      "avg_total_charges": 1584.1202260559191
+    }
+  ],
+  "model_unweighted_baseline": {
+    "precision": 0.6540880503144654,
+    "recall": 0.5561497326203209,
+    "f1": 0.6011560693641619,
+    "roc_auc": 0.8419928182076519,
+    "pr_auc": 0.6346813965325738,
+    "tp": 208,
+    "fp": 110,
+    "fn": 166,
+    "tn": 925
+  },
+  "model": {
+    "test_size": 1409,
+    "test_churners": 374,
+    "chosen": "Gradient Boosting",
+    "results": {
+      "Logistic Regression": {
+        "precision": 0.5025728987993139,
+        "recall": 0.7834224598930482,
+        "f1": 0.6123301985370951,
+        "roc_auc": 0.8416905629181844,
+        "pr_auc": 0.6338923530770887,
+        "tp": 293,
+        "fp": 290,
+        "fn": 81,
+        "tn": 745,
+        "cv_roc_auc": 0.8448573380960034
+      },
+      "Random Forest": {
+        "precision": 0.5475285171102662,
+        "recall": 0.7700534759358288,
+        "f1": 0.64,
+        "roc_auc": 0.8433413418068149,
+        "pr_auc": 0.6556353041510266,
+        "tp": 288,
+        "fp": 238,
+        "fn": 86,
+        "tn": 797,
+        "cv_roc_auc": 0.8461929352901066
+      },
+      "Gradient Boosting": {
+        "precision": 0.5150976909413855,
+        "recall": 0.7754010695187166,
+        "f1": 0.6189967982924226,
+        "roc_auc": 0.8441861065901987,
+        "pr_auc": 0.6572625234210537,
+        "tp": 290,
+        "fp": 273,
+        "fn": 84,
+        "tn": 762,
+        "cv_roc_auc": 0.8467175363172202
+      }
+    }
+  },
+  "drivers_logistic": [
+    {
+      "feature": "tenure",
+      "coef": -1.129667267327166,
+      "odds_ratio": 0.3231407580247326
+    },
+    {
+      "feature": "Contract_Two year",
+      "coef": -0.7766158647979241,
+      "odds_ratio": 0.45995994710632737
+    },
+    {
+      "feature": "Contract_Month-to-month",
+      "coef": 0.6369472183701935,
+      "odds_ratio": 1.8907001654333218
+    },
+    {
+      "feature": "InternetService_DSL",
+      "coef": -0.5559825008491377,
+      "odds_ratio": 0.5735085116998729
+    },
+    {
+      "feature": "InternetService_Fiber optic",
+      "coef": 0.5294022853791228,
+      "odds_ratio": 1.697917135359982
+    },
+    {
+      "feature": "TotalCharges",
+      "coef": 0.46069664864579724,
+      "odds_ratio": 1.5851779124711152
+    },
+    {
+      "feature": "MonthlyCharges",
+      "coef": -0.3773720594322309,
+      "odds_ratio": 0.6856609198201921
+    },
+    {
+      "feature": "PaperlessBilling_Yes",
+      "coef": 0.33562975294914815,
+      "odds_ratio": 1.398821019564727
+    },
+    {
+      "feature": "OnlineSecurity_Yes",
+      "coef": -0.23512790039260079,
+      "odds_ratio": 0.7904697417726944
+    },
+    {
+      "feature": "PaymentMethod_Electronic check",
+      "coef": 0.2299566581627434,
+      "odds_ratio": 1.2585454610748086
+    },
+    {
+      "feature": "Dependents_Yes",
+      "coef": -0.22955385248332388,
+      "odds_ratio": 0.7948881607837736
+    },
+    {
+      "feature": "OnlineSecurity_No",
+      "coef": 0.20854768492258338,
+      "odds_ratio": 1.2318876711286282
+    },
+    {
+      "feature": "OnlineSecurity_No internet service",
+      "coef": -0.20584529409463934,
+      "odds_ratio": 0.8139589908054085
+    },
+    {
+      "feature": "OnlineBackup_No internet service",
+      "coef": -0.20584529409463934,
+      "odds_ratio": 0.8139589908054085
+    }
+  ],
+  "drivers_permutation": [
+    {
+      "feature": "Contract",
+      "importance": 0.07889173060528562
+    },
+    {
+      "feature": "tenure",
+      "importance": 0.038446528369802044
+    },
+    {
+      "feature": "TotalCharges",
+      "importance": 0.011508090280468782
+    },
+    {
+      "feature": "InternetService",
+      "importance": 0.011501976284584972
+    },
+    {
+      "feature": "OnlineSecurity",
+      "importance": 0.00518242958140657
+    },
+    {
+      "feature": "TechSupport",
+      "importance": 0.0040793269437770915
+    },
+    {
+      "feature": "PaymentMethod",
+      "importance": 0.0038582758531607348
+    },
+    {
+      "feature": "PaperlessBilling",
+      "importance": 0.0036907006983733543
+    },
+    {
+      "feature": "MultipleLines",
+      "importance": 0.0029805299370517123
+    },
+    {
+      "feature": "MonthlyCharges",
+      "importance": 0.002556597518234338
+    },
+    {
+      "feature": "SeniorCitizen",
+      "importance": 0.0016920268326918065
+    },
+    {
+      "feature": "StreamingMovies",
+      "importance": 0.001678334926416795
+    }
+  ],
+  "risk_bands": [
+    {
+      "group": "High",
+      "customers": 2276,
+      "churned": 1299,
+      "churn_rate": 0.5707,
+      "avg_monthly": 76.3193,
+      "monthly_revenue": 173702.7,
+      "revenue_lost": 100333.1
+    },
+    {
+      "group": "Low",
+      "customers": 3221,
+      "churned": 175,
+      "churn_rate": 0.0543,
+      "avg_monthly": 54.4483,
+      "monthly_revenue": 175378.1,
+      "revenue_lost": 11040.55
+    },
+    {
+      "group": "Medium",
+      "customers": 1546,
+      "churned": 395,
+      "churn_rate": 0.2555,
+      "avg_monthly": 69.234,
+      "monthly_revenue": 107035.8,
+      "revenue_lost": 27757.2
+    }
+  ],
+  "value": [
+    {
+      "top_pct": 0.1,
+      "customers_contacted": 704,
+      "churners_caught": 536,
+      "hit_rate": 0.7613636363636364,
+      "share_of_all_churners": 0.2867843766720171,
+      "monthly_revenue_of_caught": 43155.85,
+      "lift_vs_random": 2.8690658592343983,
+      "saved_monthly_20": 8631.17,
+      "saved_annual_20": 103574.04000000001,
+      "saved_monthly_30": 12946.755,
+      "saved_annual_30": 155361.06,
+      "saved_monthly_40": 17262.34,
+      "saved_annual_40": 207148.08000000002
+    },
+    {
+      "top_pct": 0.15,
+      "customers_contacted": 1056,
+      "churners_caught": 754,
+      "hit_rate": 0.7140151515151515,
+      "share_of_all_churners": 0.4034242910647405,
+      "monthly_revenue_of_caught": 59943.65,
+      "lift_vs_random": 2.6906413655009156,
+      "saved_monthly_20": 11988.730000000001,
+      "saved_annual_20": 143864.76,
+      "saved_monthly_30": 17983.095,
+      "saved_annual_30": 215797.14,
+      "saved_monthly_40": 23977.460000000003,
+      "saved_annual_40": 287729.52
+    },
+    {
+      "top_pct": 0.2,
+      "customers_contacted": 1409,
+      "churners_caught": 945,
+      "hit_rate": 0.6706884315117104,
+      "share_of_all_churners": 0.5056179775280899,
+      "monthly_revenue_of_caught": 74906.54999999999,
+      "lift_vs_random": 2.5273721900144333,
+      "saved_monthly_20": 14981.309999999998,
+      "saved_annual_20": 179775.71999999997,
+      "saved_monthly_30": 22471.964999999997,
+      "saved_annual_30": 269663.57999999996,
+      "saved_monthly_40": 29962.619999999995,
+      "saved_annual_40": 359551.43999999994
+    }
+  ]
+}

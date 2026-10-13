@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telecom Customer Churn Dashboard | Kuwala Analytics</title>
+<meta name="description" content="Interactive customer churn dashboard by Kuwala Analytics, built on the public IBM Telco sample dataset.">
+<link rel="icon" href="__LOGO__">
+<style>
+:root{
+  --bg:#F2F4F8; --card:#FFFFFF; --ink:#141C33; --ink2:#4A556B; --muted:#7C8699;
+  --line:#E3E7EF; --navy:#2F4B8F; --navy-dark:#14213D; --orange:#E8590C; --pale:#C9D4EA;
+  --gold:#F2C230; --good:#1E8E5A; --warn:#B7791F; --bad:#C92A2A;
+  --shadow:0 1px 2px rgba(20,28,51,.06),0 4px 14px rgba(20,28,51,.06);
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;font-size:14px;line-height:1.45}
+.wrap{max-width:1480px;margin:0 auto;padding:16px}
+.card{background:var(--card);border-radius:10px;box-shadow:var(--shadow)}
+header.card{display:flex;align-items:center;gap:14px;padding:14px 22px;margin-bottom:14px;flex-wrap:wrap}
+header img{height:44px;width:auto}
+header h1{font-size:22px;margin:0;font-weight:650;letter-spacing:-.01em}
+header .brand{font-size:12px;color:var(--muted);margin-top:1px}
+header .refreshed{margin-left:auto;color:var(--muted);font-size:13px;text-align:right}
+.filters{display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;margin-bottom:12px}
+.filter{padding:10px 12px}
+.filter label{display:block;font-weight:600;font-size:13px;margin-bottom:6px}
+select,input[type=search]{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid #CBD2DF;
+  border-radius:6px;padding:7px 9px}
+select:focus,input:focus,button:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+button.reset{font:inherit;font-weight:600;border:0;border-radius:10px;background:var(--navy-dark);color:#fff;
+  padding:0 18px;cursor:pointer;box-shadow:var(--shadow);min-height:44px}
+button.reset:hover{background:#22335c}
+.kpis{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:12px}
+.kpi{padding:14px 10px;text-align:center}
+.kpi .label{color:var(--ink2);font-size:13px}
+.kpi .value{font-size:22px;font-weight:650;margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi .note{color:var(--muted);font-size:11px;margin-top:3px}
+.kpi.alert .value{color:var(--orange)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.grid.two{grid-template-columns:3fr 2fr}
+.panel{padding:16px 18px;min-width:0}
+.panel h2{font-size:15px;margin:0;font-weight:650}
+.panel .sub{color:var(--muted);font-size:12px;margin:2px 0 8px}
+.chart{position:relative;height:270px}
+.chart.tall{height:300px}
+.empty{display:none;padding:14px 18px;margin-bottom:12px;color:var(--bad);font-weight:600}
+.tools{display:flex;gap:10px;align-items:center;margin:8px 0 10px;flex-wrap:wrap}
+.tools input{max-width:280px}
+.tools .count{color:var(--muted);font-size:12px;margin-left:auto}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:#F5F7FB;font-size:12px;color:var(--ink2);cursor:pointer;user-select:none}
+th:hover{color:var(--ink)}
+th .arrow{color:var(--navy);margin-left:3px}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right}
+.risk{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.risk .bar{width:70px;height:6px;border-radius:3px;background:#E8ECF3;overflow:hidden}
+.risk .bar i{display:block;height:100%;background:var(--orange);border-radius:3px}
+.risk .score{min-width:34px;text-align:right}
+.band{font-size:11px;font-weight:650;padding:2px 7px;border-radius:10px}
+.band.High{background:#FDE7DB;color:#A63D06}.band.Medium{background:#FBF0CC;color:#7A5A00}.band.Low{background:#DDF1E6;color:#17663F}
+.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:10px;font-size:12px;color:var(--ink2)}
+.pager button{font:inherit;border:1px solid #CBD2DF;background:#fff;border-radius:6px;padding:5px 10px;cursor:pointer}
+.pager button:disabled{opacity:.4;cursor:default}
+.modelstats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 12px}
+.modelstats div{background:#F5F7FB;border-radius:8px;padding:8px;text-align:center}
+.modelstats b{display:block;font-size:17px}
+.modelstats span{font-size:11px;color:var(--ink2)}
+.plain{font-size:13px;color:var(--ink2);margin:10px 0 0}
+.recs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.rec{border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:12px 14px}
+.rec h3{margin:0 0 4px;font-size:14px}
+.rec p{margin:0;color:var(--ink2);font-size:13px}
+footer{color:var(--muted);font-size:12px;padding:10px 4px 20px}
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .grid,.grid.two{grid-template-columns:repeat(2,1fr)}
+  .filters{grid-template-columns:repeat(3,1fr)}
+  .recs{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  .wrap{padding:10px}
+  header h1{font-size:18px}
+  header .refreshed{margin-left:0;text-align:left;width:100%}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid,.grid.two,.recs{grid-template-columns:1fr}
+  .filters{grid-template-columns:repeat(2,1fr)}
+  .modelstats{grid-template-columns:repeat(2,1fr)}
+  .tools .count{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="card">
+  <img src="__LOGO__" alt="Kuwala Analytics logo">
+  <div>
+    <h1>Telecom Customer Churn Dashboard</h1>
+    <div class="brand">Kuwala Analytics · demonstration on the public IBM Telco sample dataset</div>
+  </div>
+  <div class="refreshed">Data refreshed at __REFRESHED__</div>
+</header>
+
+<section class="filters" aria-label="Filters">
+  <div class="card filter"><label for="f-contract">Contract</label><select id="f-contract"></select></div>
+  <div class="card filter"><label for="f-internet">Internet Service</label><select id="f-internet"></select></div>
+  <div class="card filter"><label for="f-pay">Payment Method</label><select id="f-pay"></select></div>
+  <div class="card filter"><label for="f-tband">Tenure Band</label><select id="f-tband"></select></div>
+  <div class="card filter"><label for="f-senior">Senior Citizen</label><select id="f-senior"></select></div>
+  <button class="reset" id="reset" type="button">Reset filters</button>
+</section>
+
+<div class="card empty" id="empty">No customers match this combination of filters. Try removing one.</div>
+
+<section class="kpis" aria-label="Key figures">
+  <div class="card kpi"><div class="label">Total Customers</div><div class="value" id="k-total"></div><div class="note" id="k-total-n"></div></div>
+  <div class="card kpi alert"><div class="label">Churn Rate</div><div class="value" id="k-churn"></div><div class="note" id="k-churn-n"></div></div>
+  <div class="card kpi"><div class="label">Retention Rate</div><div class="value" id="k-ret"></div><div class="note">stayed last month</div></div>
+  <div class="card kpi"><div class="label">Avg Monthly Charges</div><div class="value" id="k-monthly"></div><div class="note">per customer</div></div>
+  <div class="card kpi"><div class="label">Avg Tenure</div><div class="value" id="k-tenure"></div><div class="note">months with company</div></div>
+  <div class="card kpi alert"><div class="label">Monthly Revenue at Risk</div><div class="value" id="k-risk"></div><div class="note" id="k-risk-n"></div></div>
+  <div class="card kpi"><div class="label">Customer Lifetime Value</div><div class="value" id="k-clv"></div><div class="note">avg monthly × avg tenure</div></div>
+</section>
+
+<section class="grid">
+  <div class="card panel"><h2>Churn Rate by Contract</h2><div class="sub">Share of customers who left, by contract type</div><div class="chart"><canvas id="c-contract"></canvas></div></div>
+  <div class="card panel"><h2>Churn Rate by Tenure Band</h2><div class="sub">How churn falls the longer a customer stays</div><div class="chart"><canvas id="c-tenure"></canvas></div></div>
+  <div class="card panel"><h2>Monthly Charges vs Churn</h2><div class="sub">Customers (bars, left axis) and churn rate (line, right axis)</div><div class="chart"><canvas id="c-charges"></canvas></div></div>
+  <div class="card panel"><h2>Service Adoption vs Churn</h2><div class="sub">Churn rate with and without each add-on, internet customers only</div><div class="chart tall"><canvas id="c-services"></canvas></div></div>
+  <div class="card panel"><h2>Payment Method Breakdown</h2><div class="sub">Customers who stayed and who churned, by payment method</div><div class="chart tall"><canvas id="c-pay"></canvas></div></div>
+  <div class="card panel"><h2>Churn Rate by Demographics</h2><div class="sub">Share of each group who left</div><div class="chart tall"><canvas id="c-demo"></canvas></div></div>
+</section>
+
+<section class="grid two">
+  <div class="card panel">
+    <h2>Top At-Risk Customers</h2>
+    <div class="sub">Current customers ranked by model risk score (0 to 100). Click a column to sort.</div>
+    <div class="tools">
+      <input type="search" id="search" placeholder="Search ID, contract, payment..." aria-label="Search customers">
+      <span class="count" id="t-count"></span>
+    </div>
+    <div class="tablewrap"><table id="tbl"><thead><tr></tr></thead><tbody></tbody></table></div>
+    <div class="pager"><span id="t-page"></span><button id="prev" type="button">Previous</button><button id="next" type="button">Next</button></div>
+    <p class="plain">__VALUE_PLAIN__</p>
+  </div>
+  <div class="card panel">
+    <h2>Churn Prediction Model</h2>
+    <div class="sub">__MODEL_NAME__, tested on __TEST_N__ customers the model had not seen (figures do not change with filters)</div>
+    <div class="modelstats">
+      <div><b>__RECALL__</b><span>Recall</span></div>
+      <div><b>__PRECISION__</b><span>Precision</span></div>
+      <div><b>__F1__</b><span>F1 score</span></div>
+      <div><b>__AUC__</b><span>ROC-AUC</span></div>
+    </div>
+    <h2>Top Churn Drivers</h2>
+    <div class="sub">Relative importance (strongest driver = 100)</div>
+    <div class="chart" style="height:230px"><canvas id="c-drivers"></canvas></div>
+    <h2 style="margin-top:14px">Risk Score Distribution</h2>
+    <div class="sub">Customers by risk score, split by what actually happened</div>
+    <div class="chart" style="height:210px"><canvas id="c-riskdist"></canvas></div>
+    <p class="plain">__MODEL_PLAIN__</p>
+  </div>
+</section>
+
+<section class="card panel" style="margin-bottom:12px">
+  <h2>Recommended Retention Actions</h2>
+  <div class="sub">Based on the full customer base (not affected by filters)</div>
+  <div class="recs">__RECS__</div>
+</section>
+
+<footer>
+  Built by Kuwala Analytics. Data: the public IBM Telco Customer Churn sample dataset (7,043 customers, amounts in US dollars), used to demonstrate the approach. It is not a real client's data.
+  "Monthly revenue at risk" is the monthly charges of customers who churned in the last month. Risk scores come from out-of-fold model predictions.
+</footer>
+</div>
+
+<script>__CHARTJS__</script>
+<script>
+const D = __DATA__;
+const R = D.rows;
+// row layout: id, contract, internet, payment, tenureBand, senior, tenure, monthly, churn, risk, male, partner, dependents, addonBits
+const [ID,CON,NET,PAY,TB,SEN,TEN,MON,CH,RISK,MALE,PAR,DEP,ADD] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
+const C = {navy:'#2F4B8F', orange:'#E8590C', pale:'#C9D4EA', grid:'#E9EDF3', ink:'#141C33', ink2:'#4A556B'};
+const pct = (v,d=1) => (v*100).toFixed(d)+'%';
+const money = v => '$'+Math.round(v).toLocaleString('en-US');
+const num = v => v.toLocaleString('en-US');
+const rate = rows => rows.length ? rows.reduce((s,r)=>s+r[CH],0)/rows.length : null;
+const $ = id => document.getElementById(id);
+
+// ---------- filters ----------
+const filters = [
+  {el:'f-contract', col:CON, opts:D.dims.contract},
+  {el:'f-internet', col:NET, opts:D.dims.internet},
+  {el:'f-pay', col:PAY, opts:D.dims.payment},
+  {el:'f-tband', col:TB, opts:D.dims.tenureBand},
+  {el:'f-senior', col:SEN, opts:['No','Yes']},
+];
+filters.forEach(f => {
+  const s = $(f.el);
+  s.innerHTML = '<option value="-1">All</option>' + f.opts.map((o,i)=>`<option value="${i}">${o}</option>`).join('');
+  s.addEventListener('change', update);
+});
+$('reset').addEventListener('click', () => { filters.forEach(f => $(f.el).value = '-1'); $('search').value=''; update(); });
+function filtered(){
+  const sel = filters.map(f => [f.col, +$(f.el).value]).filter(x => x[1] >= 0);
+  return R.filter(r => sel.every(([c,v]) => r[c] === v));
+}
+
+// ---------- chart defaults ----------
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+Chart.defaults.font.size = 12;
+Chart.defaults.color = C.ink2;
+Chart.defaults.animation.duration = 350;
+Chart.defaults.maintainAspectRatio = false;
+Chart.defaults.plugins.legend.position = 'top';
+Chart.defaults.plugins.legend.labels.boxWidth = 10;
+Chart.defaults.plugins.legend.labels.boxHeight = 10;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.tooltip.backgroundColor = '#14213D';
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.plugins.tooltip.cornerRadius = 6;
+Chart.defaults.elements.bar.borderRadius = 4;
+Chart.defaults.datasets.bar.maxBarThickness = 56;
+
+const valueLabels = {id:'valueLabels', afterDatasetsDraw(chart){
+  const ctx = chart.ctx, horiz = chart.options.indexAxis === 'y';
+  chart.data.datasets.forEach((ds,i) => {
+    if(!ds.valueLabel) return;
+    ctx.save(); ctx.font = '600 11px '+Chart.defaults.font.family; ctx.fillStyle = C.ink;
+    chart.getDatasetMeta(i).data.forEach((el,j) => {
+      const v = ds.data[j]; if(v == null || isNaN(v)) return;
+      if(horiz){ ctx.textAlign='left'; ctx.textBaseline='middle'; ctx.fillText(ds.valueLabel(v), el.x+6, el.y); }
+      else { ctx.textAlign='center'; ctx.textBaseline='bottom'; ctx.fillText(ds.valueLabel(v), el.x, el.y-6); }
+    });
+    ctx.restore();
+  });
+}};
+Chart.register(valueLabels);
+
+const pctAxis = (o={}) => Object.assign({beginAtZero:true, grid:{color:C.grid}, border:{display:false},
+  ticks:{callback:v=>v+'%'}}, o);
+const catAxis = (o={}) => Object.assign({grid:{display:false}, border:{color:C.grid}}, o);
+const headroom = arr => { const m = Math.max(0,...arr.filter(v=>v!=null)); return Math.min(100, Math.ceil((m*1.18+2)/10)*10); };
+// tooltip line for a churn-rate mark: rate plus the counts behind it
+const rateTip = groups => ctx => { const g = groups()[ctx.dataIndex]; return g && g.n ?
+  [`Churn rate: ${pct(g.rate)}`, `${num(g.churned)} of ${num(g.n)} customers left`] : 'No customers'; };
+const summarise = rows => ({n:rows.length, churned:rows.reduce((s,r)=>s+r[CH],0), rate:rate(rows)});
+const p100 = g => g.n ? +(g.rate*100).toFixed(1) : null;
+
+let G = {};   // latest aggregates, read by tooltips
+
+const charts = {
+  contract: new Chart($('c-contract'), {type:'bar',
+    data:{labels:D.dims.contract, datasets:[{label:'Churn rate', backgroundColor:C.navy, valueLabel:v=>v+'%', data:[]}]},
+    options:{layout:{padding:{top:18}}, plugins:{legend:{display:false}, tooltip:{callbacks:{label:rateTip(()=>G.contract)}}},
+      scales:{y:pctAxis(), x:catAxis()}}}),
+  tenure: new Chart($('c-tenure'), {type:'line',
+    data:{labels:D.dims.tenureBand.map(s=>s.replace(' months','')), datasets:[{label:'Churn rate', borderColor:C.orange, backgroundColor:C.orange,
+      borderWidth:2, pointRadius:5, pointHoverRadius:7, pointBorderColor:'#fff', pointBorderWidth:2, tension:.25,
+      spanGaps:true, valueLabel:v=>v+'%', data:[]}]},
+    options:{layout:{padding:{top:22,right:18,left:6}}, interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:rateTip(()=>G.tenure)}}},
+      scales:{y:pctAxis(), x:catAxis({offset:true, title:{display:true,text:'Months with the company'}})}}}),
+  charges: new Chart($('c-charges'), {type:'bar',
+    data:{labels:D.dims.chargeBand, datasets:[
+      {type:'line', label:'Churn rate', yAxisID:'y2', borderColor:C.orange, backgroundColor:C.orange, borderWidth:2,
+       pointRadius:5, pointHoverRadius:7, pointBorderColor:'#fff', pointBorderWidth:2, tension:.25, spanGaps:true,
+       valueLabel:v=>v+'%', data:[]},
+      {type:'bar', label:'Customers', yAxisID:'y', backgroundColor:C.pale, data:[]}]},
+    options:{layout:{padding:{top:8}}, interaction:{mode:'index',intersect:false},
+      plugins:{tooltip:{callbacks:{label:ctx => ctx.dataset.yAxisID==='y2' ?
+        `Churn rate: ${ctx.parsed.y}%` : `Customers: ${num(ctx.parsed.y)}`}}},
+      scales:{y:{beginAtZero:true, grid:{color:C.grid}, border:{display:false}, title:{display:true,text:'Customers'}},
+        y2:pctAxis({position:'right', grid:{display:false}, title:{display:true,text:'Churn rate'}}), x:catAxis()}}}),
+  services: new Chart($('c-services'), {type:'bar',
+    data:{labels:D.addons, datasets:[
+      {label:'Has the service', backgroundColor:C.navy, valueLabel:v=>v+'%', data:[]},
+      {label:'Does not have it', backgroundColor:C.orange, valueLabel:v=>v+'%', data:[]}]},
+    options:{indexAxis:'y', layout:{padding:{right:36}},
+      plugins:{tooltip:{callbacks:{
+        label:ctx => { const s = G.services[ctx.dataIndex], g = ctx.datasetIndex ? s.without : s.with;
+          return g.n ? `${ctx.dataset.label}: ${pct(g.rate)} churn (${num(g.churned)} of ${num(g.n)})` : 'No customers'; },
+        afterBody:items => { const s = G.services[items[0].dataIndex]; const t = s.with.n + s.without.n;
+          return t ? `Adoption: ${pct(s.with.n/t)} of internet customers` : ''; }}}},
+      scales:{x:pctAxis(), y:catAxis()}}}),
+  pay: new Chart($('c-pay'), {type:'bar',
+    data:{labels:D.dims.payment.map(s=>s.replace(' (automatic)',' (auto)')), datasets:[
+      {label:'Stayed', backgroundColor:C.navy, borderColor:'#fff', borderWidth:{right:2}, data:[]},
+      {label:'Churned', backgroundColor:C.orange, data:[]}]},
+    options:{indexAxis:'y', interaction:{mode:'index',intersect:false,axis:'y'},
+      plugins:{tooltip:{callbacks:{
+        label:ctx => `${ctx.dataset.label}: ${num(ctx.parsed.x)}`,
+        afterBody:items => { const g = G.pay[items[0].dataIndex]; return g.n ? `Churn rate: ${pct(g.rate)}` : ''; }}}},
+      scales:{x:{stacked:true, beginAtZero:true, grid:{color:C.grid}, border:{display:false}, title:{display:true,text:'Customers'}},
+        y:catAxis({stacked:true})}}}),
+  demo: new Chart($('c-demo'), {type:'bar',
+    data:{labels:D.demoLabels, datasets:[{label:'Churn rate', backgroundColor:C.navy, valueLabel:v=>v+'%', data:[]}]},
+    options:{indexAxis:'y', layout:{padding:{right:40}},
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:rateTip(()=>G.demo)}}},
+      scales:{x:pctAxis(), y:catAxis()}}}),
+  drivers: new Chart($('c-drivers'), {type:'bar',
+    data:{labels:D.drivers.map(d=>d.label), datasets:[{label:'Relative importance', backgroundColor:C.navy,
+      valueLabel:v=>v, data:D.drivers.map(d=>d.score)}]},
+    options:{indexAxis:'y', layout:{padding:{right:30}},
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>`Relative importance: ${ctx.parsed.x}`,
+        afterBody:items=>D.drivers[items[0].dataIndex].note}}},
+      scales:{x:{beginAtZero:true, max:100, grid:{color:C.grid}, border:{display:false}}, y:catAxis()}}}),
+  riskdist: new Chart($('c-riskdist'), {type:'bar',
+    data:{labels:['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-100'], datasets:[
+      {label:'Stayed', backgroundColor:C.navy, borderColor:'#fff', borderWidth:{top:2}, data:[]},
+      {label:'Churned', backgroundColor:C.orange, data:[]}]},
+    options:{interaction:{mode:'index',intersect:false},
+      plugins:{tooltip:{callbacks:{title:items=>`Risk score ${items[0].label}`,
+        label:ctx=>`${ctx.dataset.label}: ${num(ctx.parsed.y)}`,
+        afterBody:items => { const t = items.reduce((s,i)=>s+i.parsed.y,0), c = items.find(i=>i.datasetIndex===1);
+          return t ? `Actual churn rate: ${pct((c?c.parsed.y:0)/t)}` : ''; }}}},
+      scales:{x:catAxis({stacked:true, title:{display:true,text:'Risk score'}}),
+        y:{stacked:true, beginAtZero:true, grid:{color:C.grid}, border:{display:false}, title:{display:true,text:'Customers'}}}}}),
+};
+
+// ---------- table ----------
+const COLS = [
+  {key:'id', label:'Customer ID', get:r=>r[ID]},
+  {key:'risk', label:'Risk score', num:true, get:r=>r[RISK]},
+  {key:'contract', label:'Contract', get:r=>D.dims.contract[r[CON]]},
+  {key:'tenure', label:'Tenure (months)', num:true, get:r=>r[TEN]},
+  {key:'monthly', label:'Monthly charges', num:true, get:r=>r[MON]},
+  {key:'internet', label:'Internet', get:r=>D.dims.internet[r[NET]]},
+  {key:'payment', label:'Payment method', get:r=>D.dims.payment[r[PAY]]},
+];
+const T = {sort:'risk', dir:-1, page:0, size:10, rows:[]};
+const band = s => s >= 60 ? 'High' : s >= 30 ? 'Medium' : 'Low';
+function renderHead(){
+  $('tbl').querySelector('thead tr').innerHTML = COLS.map(c =>
+    `<th class="${c.num?'num':''}" data-key="${c.key}" tabindex="0" role="button">${c.label}` +
+    (T.sort===c.key ? `<span class="arrow">${T.dir<0?'▼':'▲'}</span>` : '') + '</th>').join('');
+}
+function renderTable(){
+  const q = $('search').value.trim().toLowerCase();
+  let rows = T.rows;
+  if(q) rows = rows.filter(r => COLS.some(c => String(c.get(r)).toLowerCase().includes(q)));
+  const col = COLS.find(c => c.key === T.sort);
+  rows = rows.slice().sort((a,b) => { const x = col.get(a), y = col.get(b); return (x<y?-1:x>y?1:0)*T.dir; });
+  const pages = Math.max(1, Math.ceil(rows.length/T.size));
+  T.page = Math.min(T.page, pages-1);
+  const view = rows.slice(T.page*T.size, (T.page+1)*T.size);
+  $('tbl').querySelector('tbody').innerHTML = view.length ? view.map(r => `<tr>
+    <td>${r[ID]}</td>
+    <td class="num"><div class="risk"><span class="band ${band(r[RISK])}">${band(r[RISK])}</span>
+      <div class="bar"><i style="width:${r[RISK]}%"></i></div><span class="score">${r[RISK].toFixed(1)}</span></div></td>
+    <td>${D.dims.contract[r[CON]]}</td><td class="num">${r[TEN]}</td><td class="num">$${r[MON].toFixed(2)}</td>
+    <td>${D.dims.internet[r[NET]]}</td><td>${D.dims.payment[r[PAY]]}</td></tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;color:#7C8699">No customers found</td></tr>';
+  const high = rows.filter(r => r[RISK] >= 60);
+  $('t-count').textContent = `${num(rows.length)} current customers · ${num(high.length)} high risk · ` +
+    `${money(high.reduce((s,r)=>s+r[MON],0))} monthly revenue in high risk`;
+  $('t-page').textContent = `Page ${T.page+1} of ${num(pages)}`;
+  $('prev').disabled = T.page === 0; $('next').disabled = T.page >= pages-1;
+  renderHead();
+}
+function sortBy(key){ if(T.sort===key) T.dir *= -1; else { T.sort = key; T.dir = COLS.find(c=>c.key===key).num ? -1 : 1; } T.page = 0; renderTable(); }
+$('tbl').querySelector('thead').addEventListener('click', e => { const th = e.target.closest('th'); if(th) sortBy(th.dataset.key); });
+$('tbl').querySelector('thead').addEventListener('keydown', e => { const th = e.target.closest('th'); if(th && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); sortBy(th.dataset.key); } });
+$('search').addEventListener('input', () => { T.page = 0; renderTable(); });
+$('prev').addEventListener('click', () => { T.page--; renderTable(); });
+$('next').addEventListener('click', () => { T.page++; renderTable(); });
+
+// ---------- update everything ----------
+function setData(chart, ...arrs){ arrs.forEach((a,i) => chart.data.datasets[i].data = a); chart.update(); }
+function update(){
+  const rows = filtered(), n = rows.length;
+  $('empty').style.display = n ? 'none' : 'block';
+  const churned = rows.filter(r => r[CH]);
+  const avg = (rs,c) => rs.length ? rs.reduce((s,r)=>s+r[c],0)/rs.length : 0;
+  const lost = churned.reduce((s,r)=>s+r[MON],0), total = rows.reduce((s,r)=>s+r[MON],0);
+  $('k-total').textContent = num(n);
+  $('k-total-n').textContent = `${pct(n/R.length,0)} of all customers`;
+  $('k-churn').textContent = n ? pct(churned.length/n) : 'n/a';
+  $('k-churn-n').textContent = `${num(churned.length)} customers left`;
+  $('k-ret').textContent = n ? pct(1-churned.length/n) : 'n/a';
+  $('k-monthly').textContent = n ? '$'+avg(rows,MON).toFixed(2) : 'n/a';
+  $('k-tenure').textContent = n ? avg(rows,TEN).toFixed(1)+' mo' : 'n/a';
+  $('k-risk').textContent = money(lost);
+  $('k-risk-n').textContent = total ? `${pct(lost/total)} of monthly billing` : '';
+  $('k-clv').textContent = n ? money(avg(rows,MON)*avg(rows,TEN)) : 'n/a';
+
+  const by = (col,k) => Array.from({length:k}, (_,i) => summarise(rows.filter(r => r[col] === i)));
+  G.contract = by(CON, D.dims.contract.length);
+  G.tenure = by(TB, D.dims.tenureBand.length);
+  G.pay = by(PAY, D.dims.payment.length);
+  const cb = m => m < 30 ? 0 : m < 50 ? 1 : m < 70 ? 2 : m < 90 ? 3 : 4;
+  G.charges = Array.from({length:5}, (_,i) => summarise(rows.filter(r => cb(r[MON]) === i)));
+  const net = rows.filter(r => D.dims.internet[r[NET]] !== 'No');
+  G.services = D.addons.map((_,i) => ({with:summarise(net.filter(r => r[ADD]>>i & 1)), without:summarise(net.filter(r => !(r[ADD]>>i & 1)))}));
+  G.demo = [[SEN,1],[SEN,0],[PAR,0],[PAR,1],[DEP,0],[DEP,1],[MALE,0],[MALE,1]].map(([c,v]) => summarise(rows.filter(r => r[c] === v)));
+
+  const fit = (chart, axis, vals) => { chart.options.scales[axis].max = headroom(vals); };
+  let v = G.contract.map(p100); fit(charts.contract,'y',v); setData(charts.contract, v);
+  v = G.tenure.map(p100); fit(charts.tenure,'y',v); setData(charts.tenure, v);
+  v = G.charges.map(p100); fit(charts.charges,'y2',v); setData(charts.charges, v, G.charges.map(g=>g.n));
+  const sw = G.services.map(s=>p100(s.with)), so = G.services.map(s=>p100(s.without));
+  fit(charts.services,'x',[...sw,...so]); setData(charts.services, sw, so);
+  setData(charts.pay, G.pay.map(g=>g.n-g.churned), G.pay.map(g=>g.churned));
+  v = G.demo.map(p100); fit(charts.demo,'x',v); setData(charts.demo, v);
+  const bins = [0,1].map(c => { const a = Array(10).fill(0); rows.forEach(r => { if(r[CH]===c) a[Math.min(9,Math.floor(r[RISK]/10))]++; }); return a; });
+  setData(charts.riskdist, bins[0], bins[1]);
+
+  T.rows = rows.filter(r => !r[CH]); T.page = 0; renderTable();
+}
+update();
+</script>
+</body>
+</html>

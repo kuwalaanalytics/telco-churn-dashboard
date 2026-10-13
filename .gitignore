@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+# Source archive (the extracted CSV is in data/raw) and third-party reference images
+*.zip
+*.webp

@@ -1,0 +1,6 @@
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.5
+plotly>=6.0
+kaleido>=1.0
+pillow>=10.0
