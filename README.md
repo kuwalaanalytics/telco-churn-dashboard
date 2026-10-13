@@ -16,7 +16,7 @@ A Kuwala Analytics portfolio project: who is leaving a telecom business, how muc
 - Internet customers with online security churn at 14.6%, against 41.8% without it.
 - The riskiest 20% of customers, as ranked by the model, contained 51% of all leavers.
 
-The full write-up is in [portfolio/case-study.md](portfolio/case-study.md).
+The full write-up is in [portfolio/case-study.md](portfolio/case-study.md), and the client report is in [reports/](reports/) as a PDF and a Word document.
 
 ## Open the dashboard
 
@@ -31,6 +31,7 @@ python -m venv .venv
 .venv/bin/python src/analysis.py         # analysis, segments, model, risk scores
 .venv/bin/python src/build_dashboard.py  # dashboard/index.html
 .venv/bin/python src/make_charts.py      # social media chart images (needs Chrome for kaleido)
+.venv/bin/python src/make_report.py      # client report as Word and PDF (needs LibreOffice)
 ```
 
 ## Project layout
@@ -39,9 +40,10 @@ python -m venv .venv
 |---|---|
 | `data/raw/` | The original CSV, untouched |
 | `data/clean/` | Cleaned data, scored data, `data_profile.json` (schema and cleaning log), `findings.json` (every number quoted) |
-| `src/` | The four scripts above, the dashboard template and the embedded Chart.js library |
+| `src/` | The five scripts above, the dashboard template and the embedded Chart.js library |
 | `dashboard/index.html` | The interactive dashboard |
 | `portfolio/` | Case study, social media copy and chart images |
+| `reports/` | The client report as a Word document and a PDF |
 | `assets/` | Kuwala Analytics logo |
 
 ## Cleaning decisions
