@@ -2,7 +2,7 @@
 
 **By Kuwala Analytics**
 
-**Live dashboard:** https://kuwalaanalytics.github.io/telco-churn-dashboard/
+**Live dashboard:** https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 > **A note on the data.** This case study uses the public IBM Telco Customer Churn sample dataset. It shows how Kuwala Analytics approaches a churn problem. It is not a real client's data, and the figures below are not results achieved for any client. Amounts are in US dollars, as in the dataset.
 
@@ -145,4 +145,4 @@ These are scenarios, not measured outcomes. They come from a back-test on custom
 - **Chart.js, HTML, CSS and JavaScript** for the interactive dashboard
 - **Git and GitHub Pages** for version control and hosting
 
-Code and data: https://github.com/kuwalaanalytics/telco-churn-dashboard
+Code and data: https://github.com/kuwalaanalytics/telecom-churn-retention-analysis

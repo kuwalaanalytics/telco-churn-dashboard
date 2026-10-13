@@ -1,6 +1,6 @@
 # LinkedIn Content
 
-Live dashboard link to use in every post: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+Live dashboard link to use in every post: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 Suggested images: `images/dashboard-screenshot.png` first, then `02-churn-by-contract.png`, `03-churn-by-tenure.png` and `08-value-of-targeting.png`.
 
@@ -20,7 +20,7 @@ Three things stood out:
 
 This uses the public IBM Telco sample dataset to demonstrate the approach. It is not client data.
 
-Explore the live dashboard: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+Explore the live dashboard: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 #CustomerChurn #DataAnalytics #Telecom #BusinessIntelligence #Malawi
 
@@ -46,7 +46,7 @@ The result is one dashboard an owner can open on a laptop or phone, filter by co
 
 To be clear, this is a demonstration on public sample data, not a client project. The approach is the same one I would bring to your customer data.
 
-See it live: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+See it live: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 If your business loses customers each month and you are not sure why, I would be glad to talk.
 
@@ -80,7 +80,7 @@ What it could be worth:
 
 The riskiest 20% of customers contained 51% of all leavers. If a retention offer kept 30% of those, that is about $270,000 a year in protected revenue on this dataset. The 30% is an assumption that a real project would test.
 
-Live dashboard: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+Live dashboard: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 Tools: Python, pandas, scikit-learn, Plotly, Chart.js.
 
@@ -90,7 +90,7 @@ Tools: Python, pandas, scikit-learn, Plotly, Chart.js.
 
 ## Featured section description
 
-**Title:** Telecom Customer Churn Dashboard and Prediction Model
+**Title:** Telecom Customer Churn and Retention Analysis: Dashboard and Prediction Model
 
 **Description:**
 An end-to-end churn analysis showing who is leaving a telecom business, how much revenue goes with them, and which customers to call first. Includes an interactive dashboard with filters and KPIs, five customer segments, a prediction model that finds 51% of leavers in the riskiest 20% of customers, and six retention recommendations. Built with Python, scikit-learn and Chart.js on the public IBM Telco sample dataset to demonstrate the approach.

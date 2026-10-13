@@ -23,7 +23,7 @@ The good news: the records also showed who was likely to leave next. By looking 
 
 We put it all into one simple dashboard you can open on your phone or laptop.
 
-See it here: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+See it here: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 Whether you run an internet service, a gym, a school, a SACCO or a pay TV business, the same idea works for you. Send us a message and let us look at your numbers together.
 
@@ -44,6 +44,6 @@ Here is what the numbers showed:
 
 With the right list, your staff do not have to guess. They call the right people, at the right time, with the right offer.
 
-Take a look at the dashboard: https://kuwalaanalytics.github.io/telco-churn-dashboard/
+Take a look at the dashboard: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 Want to see this for your own business? Message Kuwala Analytics today. All we need to start is your customer and sales records.

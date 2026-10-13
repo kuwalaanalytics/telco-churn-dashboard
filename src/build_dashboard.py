@@ -159,7 +159,7 @@ def main():
     OUT.write_text(html)
     # Root page so the GitHub Pages site address opens the dashboard directly.
     (ROOT / "index.html").write_text(
-        '<!DOCTYPE html><meta charset="utf-8"><title>Telecom Customer Churn Dashboard | Kuwala Analytics</title>'
+        '<!DOCTYPE html><meta charset="utf-8"><title>Telecom Customer Churn and Retention Analysis | Kuwala Analytics</title>'
         '<meta http-equiv="refresh" content="0; url=dashboard/"><a href="dashboard/">Open the dashboard</a>\n')
     print(f"Wrote {OUT} ({OUT.stat().st_size / 1024:.0f} KB)")
 

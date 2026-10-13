@@ -1,8 +1,8 @@
-# Telecom Customer Churn Analysis
+# Telecom Customer Churn and Retention Analysis
 
 A Kuwala Analytics portfolio project: who is leaving a telecom business, how much revenue goes with them, and which customers to call first.
 
-**Live dashboard:** https://kuwalaanalytics.github.io/telco-churn-dashboard/
+**Live dashboard:** https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 ![Dashboard screenshot](portfolio/images/dashboard-screenshot.png)
 

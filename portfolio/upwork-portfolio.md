@@ -18,7 +18,7 @@ This is a demonstration on public sample data, not a client project.
 
 ## Project link
 
-https://kuwalaanalytics.github.io/telco-churn-dashboard/
+https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
 
 ## Skills tags
 
