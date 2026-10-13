@@ -44,6 +44,7 @@ python -m venv .venv
 | `dashboard/index.html` | The interactive dashboard |
 | `portfolio/` | Case study, social media copy and chart images |
 | `reports/` | The client report as a Word document and a PDF |
+| `powerbi/` | Optional pack for rebuilding the dashboard in Power BI Desktop: data files, DAX measures, theme and build guide |
 | `assets/` | Kuwala Analytics logo |
 
 ## Cleaning decisions

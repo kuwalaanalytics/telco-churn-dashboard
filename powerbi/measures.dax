@@ -1,0 +1,88 @@
+// Kuwala Analytics: Telecom Customer Churn and Retention Analysis
+// DAX measures for the Power BI version.
+//
+// How to use: in Power BI Desktop, select the Customers table, choose
+// "New measure", and paste ONE measure at a time (from its name to the end of
+// its formula). Set the format shown in the comment above each measure.
+// Measures marked [Services] belong on the Services table.
+
+// ---------- KPI cards (Customers table) ----------
+
+// Format: whole number, thousands separator
+Total Customers = COUNTROWS ( Customers )
+
+// Format: whole number, thousands separator
+Churned Customers = CALCULATE ( [Total Customers], Customers[Churn] = "Yes" )
+
+// Format: whole number, thousands separator
+Stayed Customers = CALCULATE ( [Total Customers], Customers[Churn] = "No" )
+
+// Format: percentage, 1 decimal
+Churn Rate = DIVIDE ( [Churned Customers], [Total Customers] )
+
+// Format: percentage, 1 decimal
+Retention Rate = DIVIDE ( [Stayed Customers], [Total Customers] )
+
+// Format: currency ($), 2 decimals
+Avg Monthly Charges = AVERAGE ( Customers[MonthlyCharges] )
+
+// Format: decimal number, 1 decimal
+Avg Tenure (Months) = AVERAGE ( Customers[tenure] )
+
+// Format: currency ($), 0 decimals
+Total Monthly Revenue = SUM ( Customers[MonthlyCharges] )
+
+// Monthly charges of customers who churned in the last month.
+// Format: currency ($), 0 decimals
+Monthly Revenue at Risk =
+CALCULATE ( SUM ( Customers[MonthlyCharges] ), Customers[Churn] = "Yes" )
+
+// Format: percentage, 1 decimal
+Revenue at Risk % = DIVIDE ( [Monthly Revenue at Risk], [Total Monthly Revenue] )
+
+// Value to date: average monthly charge x average months with the company.
+// Format: currency ($), 0 decimals
+Customer Lifetime Value = [Avg Monthly Charges] * [Avg Tenure (Months)]
+
+// ---------- At-risk customers (Customers table) ----------
+
+// Current customers only (those who have not churned).
+// Format: whole number, thousands separator
+Current Customers = CALCULATE ( [Total Customers], Customers[Churn] = "No" )
+
+// Format: whole number, thousands separator
+High Risk Customers =
+CALCULATE ( [Total Customers], Customers[Churn] = "No", Customers[RiskBand] = "High" )
+
+// Format: currency ($), 0 decimals
+High Risk Monthly Revenue =
+CALCULATE (
+    SUM ( Customers[MonthlyCharges] ),
+    Customers[Churn] = "No",
+    Customers[RiskBand] = "High"
+)
+
+// Format: decimal number, 1 decimal
+Avg Risk Score = AVERAGE ( Customers[RiskScore] )
+
+// ---------- Service adoption vs churn [Services] ----------
+// Create these three on the Services table.
+
+// Format: whole number, thousands separator
+Service Customers = COUNTROWS ( Services )
+
+// Use with Service on the axis and HasService as the legend.
+// Format: percentage, 1 decimal
+Service Churn Rate =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( Services ), Services[Churn] = "Yes" ),
+    COUNTROWS ( Services )
+)
+
+// Share of internet customers who have the service. Use with Service on the axis only.
+// Format: percentage, 0 decimals
+Service Adoption =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( Services ), Services[HasService] = "Has the service" ),
+    CALCULATE ( COUNTROWS ( Services ), REMOVEFILTERS ( Services[HasService] ) )
+)
