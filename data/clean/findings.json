@@ -745,30 +745,30 @@
   "risk_bands": [
     {
       "group": "High",
-      "customers": 2276,
-      "churned": 1299,
-      "churn_rate": 0.5707,
-      "avg_monthly": 76.3193,
-      "monthly_revenue": 173702.7,
-      "revenue_lost": 100333.1
+      "customers": 2279,
+      "churned": 1300,
+      "churn_rate": 0.5704,
+      "avg_monthly": 76.3432,
+      "monthly_revenue": 173986.05,
+      "revenue_lost": 100418.4
     },
     {
       "group": "Low",
-      "customers": 3221,
+      "customers": 3218,
       "churned": 175,
-      "churn_rate": 0.0543,
-      "avg_monthly": 54.4483,
-      "monthly_revenue": 175378.1,
+      "churn_rate": 0.0544,
+      "avg_monthly": 54.4278,
+      "monthly_revenue": 175148.7,
       "revenue_lost": 11040.55
     },
     {
       "group": "Medium",
       "customers": 1546,
-      "churned": 395,
-      "churn_rate": 0.2555,
-      "avg_monthly": 69.234,
-      "monthly_revenue": 107035.8,
-      "revenue_lost": 27757.2
+      "churned": 394,
+      "churn_rate": 0.2549,
+      "avg_monthly": 69.1991,
+      "monthly_revenue": 106981.85,
+      "revenue_lost": 27671.9
     }
   ],
   "value": [

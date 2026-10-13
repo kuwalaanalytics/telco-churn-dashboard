@@ -724,7 +724,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 4952-YSOGZ,Female,No,Yes,Yes,4,Yes,Yes,Fiber optic,No,No,No,No,No,Yes,Month-to-month,Yes,Electronic check,85.95,381.3,Yes,1,0-6 months,$70-89,Yes,1,4,No,New and Uncommitted,88.5,High
 1589-AGTLK,Male,No,No,No,3,Yes,No,DSL,No,No,No,No,No,No,Month-to-month,Yes,Electronic check,45.35,141.5,Yes,1,0-6 months,$30-49,Yes,0,2,Yes,New and Uncommitted,78.1,High
 5244-IRFIH,Male,Yes,Yes,No,33,Yes,Yes,Fiber optic,No,No,No,No,Yes,Yes,Month-to-month,Yes,Electronic check,94.5,3105.55,Yes,1,25-48 months,$90+,Yes,2,5,No,Fibre Flight Risks,79.9,High
-6549-YMFAW,Male,Yes,Yes,No,9,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Mailed check,21.25,204.55,No,0,7-12 months,Under $30,No,0,1,Yes,New and Uncommitted,30.0,Low
+6549-YMFAW,Male,Yes,Yes,No,9,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Mailed check,21.25,204.55,No,0,7-12 months,Under $30,No,0,1,Yes,New and Uncommitted,30.0,Medium
 4950-HKQTE,Female,No,No,No,22,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Two year,No,Mailed check,26.25,605.9,No,0,13-24 months,Under $30,No,0,2,Yes,Committed Essentials,4.9,Low
 6786-OBWQR,Female,No,Yes,Yes,5,Yes,No,Fiber optic,No,No,No,No,Yes,No,Month-to-month,Yes,Electronic check,80.85,356.1,No,0,0-6 months,$70-89,Yes,1,3,No,New and Uncommitted,87.3,High
 2684-EIWEO,Female,Yes,No,No,30,Yes,Yes,Fiber optic,Yes,Yes,Yes,No,No,No,Month-to-month,No,Credit card (automatic),91.7,2758.15,Yes,1,25-48 months,$90+,Yes,3,6,No,Fibre Flight Risks,51.7,Medium
@@ -2641,7 +2641,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 2433-KMEAS,Male,No,No,No,22,Yes,Yes,DSL,Yes,No,No,No,No,No,Month-to-month,Yes,Electronic check,54.45,1127.35,Yes,1,13-24 months,$50-69,Yes,1,4,No,Settled Month-to-Month,55.6,Medium
 4391-LNRXK,Male,No,No,No,22,Yes,No,Fiber optic,No,Yes,Yes,Yes,No,Yes,Month-to-month,Yes,Bank transfer (automatic),94.95,2142.8,No,0,13-24 months,$90+,Yes,4,6,No,Fibre Flight Risks,53.8,Medium
 8250-ZNGGW,Female,Yes,No,No,5,Yes,No,DSL,Yes,Yes,No,Yes,No,No,Month-to-month,No,Credit card (automatic),59.9,287.85,No,0,0-6 months,$50-69,Yes,3,5,No,New and Uncommitted,54.9,Medium
-2195-ZRVAX,Female,No,Yes,No,47,Yes,No,Fiber optic,No,No,Yes,No,No,Yes,Month-to-month,Yes,Electronic check,85.3,4045.65,Yes,1,25-48 months,$70-89,Yes,2,4,No,Fibre Flight Risks,60.0,Medium
+2195-ZRVAX,Female,No,Yes,No,47,Yes,No,Fiber optic,No,No,Yes,No,No,Yes,Month-to-month,Yes,Electronic check,85.3,4045.65,Yes,1,25-48 months,$70-89,Yes,2,4,No,Fibre Flight Risks,60.0,High
 3550-SAHFP,Female,No,No,No,33,Yes,Yes,Fiber optic,No,No,No,No,No,Yes,Month-to-month,Yes,Electronic check,83.35,2757.85,Yes,1,25-48 months,$70-89,Yes,1,4,No,Fibre Flight Risks,76.3,High
 2011-TRQYE,Male,No,No,No,18,No,No phone service,DSL,No,Yes,Yes,No,No,No,Month-to-month,Yes,Credit card (automatic),33.5,600.0,Yes,1,13-24 months,$30-49,Yes,2,3,No,Settled Month-to-Month,46.7,Medium
 8562-GHPPI,Female,No,No,No,1,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,No,Credit card (automatic),19.8,19.8,No,0,0-6 months,Under $30,No,0,1,Yes,New and Uncommitted,36.7,Medium
@@ -3395,7 +3395,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 4683-WYDOU,Male,No,Yes,No,62,Yes,Yes,Fiber optic,No,No,Yes,Yes,Yes,Yes,Two year,Yes,Bank transfer (automatic),107.6,6912.7,No,0,49-72 months,$90+,Yes,4,7,No,Loyal High-Value,45.9,Medium
 9052-DHNKM,Male,No,No,No,26,Yes,Yes,DSL,Yes,Yes,No,No,No,No,One year,No,Electronic check,61.55,1581.95,No,0,25-48 months,$50-69,Yes,2,5,No,Committed Essentials,14.6,Low
 6794-HKIAJ,Male,No,No,No,62,Yes,Yes,Fiber optic,Yes,Yes,Yes,No,No,No,Month-to-month,No,Bank transfer (automatic),90.7,5586.45,No,0,49-72 months,$90+,Yes,3,6,No,Fibre Flight Risks,17.4,Low
-5578-NKCXI,Female,No,Yes,Yes,58,Yes,No,Fiber optic,Yes,Yes,No,No,Yes,Yes,One year,No,Credit card (automatic),99.25,5846.65,No,0,49-72 months,$90+,Yes,4,6,No,Loyal High-Value,30.0,Low
+5578-NKCXI,Female,No,Yes,Yes,58,Yes,No,Fiber optic,Yes,Yes,No,No,Yes,Yes,One year,No,Credit card (automatic),99.25,5846.65,No,0,49-72 months,$90+,Yes,4,6,No,Loyal High-Value,30.0,Medium
 1642-HMARX,Female,No,Yes,No,68,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic check,91.7,6424.7,No,0,49-72 months,$90+,Yes,6,9,No,Loyal High-Value,11.8,Low
 3096-WPXBT,Female,No,Yes,Yes,61,Yes,Yes,Fiber optic,Yes,Yes,Yes,No,No,Yes,One year,Yes,Credit card (automatic),100.7,6018.65,No,0,49-72 months,$90+,Yes,4,7,No,Loyal High-Value,26.7,Low
 8434-PNQZX,Female,No,No,No,42,Yes,Yes,DSL,No,No,Yes,Yes,Yes,Yes,Two year,Yes,Credit card (automatic),78.45,3373.4,No,0,25-48 months,$70-89,Yes,4,7,No,Loyal High-Value,10.1,Low
@@ -4684,7 +4684,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 0504-HHAPI,Female,Yes,No,No,27,Yes,Yes,Fiber optic,No,No,Yes,No,No,Yes,Month-to-month,No,Credit card (automatic),88.3,2467.75,Yes,1,25-48 months,$70-89,Yes,2,5,No,Fibre Flight Risks,66.5,High
 9360-OMDZZ,Male,No,No,No,24,Yes,Yes,Fiber optic,No,No,No,No,Yes,Yes,Month-to-month,Yes,Electronic check,94.1,2322.85,No,0,13-24 months,$90+,Yes,2,5,No,Fibre Flight Risks,84.4,High
 6305-YLBMM,Male,No,No,No,69,Yes,No,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,One year,Yes,Bank transfer (automatic),104.05,7262.0,Yes,1,49-72 months,$90+,Yes,5,7,No,Loyal High-Value,31.8,Medium
-0345-XMMUG,Female,No,Yes,No,46,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Credit card (automatic),108.9,4854.3,No,0,25-48 months,$90+,Yes,5,8,No,Loyal High-Value,30.0,Low
+0345-XMMUG,Female,No,Yes,No,46,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Credit card (automatic),108.9,4854.3,No,0,25-48 months,$90+,Yes,5,8,No,Loyal High-Value,30.0,Medium
 8024-XNAFQ,Female,Yes,No,No,72,Yes,Yes,Fiber optic,Yes,Yes,Yes,Yes,No,Yes,Two year,Yes,Bank transfer (automatic),107.4,7748.75,No,0,49-72 months,$90+,Yes,5,8,No,Loyal High-Value,8.6,Low
 3647-GMGDH,Male,No,Yes,No,22,Yes,No,Fiber optic,No,No,Yes,No,Yes,Yes,Month-to-month,Yes,Credit card (automatic),94.7,1914.9,Yes,1,13-24 months,$90+,Yes,3,5,No,Fibre Flight Risks,60.2,High
 2988-GBIVW,Female,Yes,Yes,No,70,Yes,Yes,Fiber optic,Yes,No,No,No,No,Yes,Month-to-month,Yes,Electronic check,90.85,6470.1,No,0,49-72 months,$90+,Yes,2,5,No,Fibre Flight Risks,40.2,Medium
@@ -5198,7 +5198,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 0786-IVLAW,Female,Yes,No,No,66,Yes,Yes,Fiber optic,No,Yes,Yes,No,Yes,Yes,One year,No,Bank transfer (automatic),108.1,7238.6,No,0,49-72 months,$90+,Yes,4,7,No,Loyal High-Value,42.8,Medium
 7566-DSRLQ,Female,No,Yes,No,72,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic check,110.15,7998.8,No,0,49-72 months,$90+,Yes,5,8,No,Loyal High-Value,9.0,Low
 0643-OKLRP,Female,Yes,Yes,No,47,Yes,Yes,Fiber optic,Yes,No,No,No,No,No,Month-to-month,No,Electronic check,80.35,3825.85,Yes,1,25-48 months,$70-89,Yes,1,4,No,Fibre Flight Risks,52.3,Medium
-7245-JMTTQ,Female,No,No,No,51,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,One year,Yes,Electronic check,111.5,5703.25,No,0,49-72 months,$90+,Yes,5,8,No,Loyal High-Value,60.0,Medium
+7245-JMTTQ,Female,No,No,No,51,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,One year,Yes,Electronic check,111.5,5703.25,No,0,49-72 months,$90+,Yes,5,8,No,Loyal High-Value,60.0,High
 6050-IJRHS,Female,No,Yes,Yes,70,Yes,Yes,Fiber optic,No,Yes,Yes,No,Yes,Yes,One year,Yes,Electronic check,106.5,7397.0,No,0,49-72 months,$90+,Yes,4,7,No,Loyal High-Value,36.2,Medium
 6202-JVYEU,Male,No,No,No,9,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,One year,Yes,Electronic check,19.9,164.6,No,0,7-12 months,Under $30,No,0,1,Yes,Committed Essentials,18.5,Low
 8591-TKMZH,Male,No,Yes,Yes,59,Yes,Yes,Fiber optic,Yes,Yes,No,Yes,Yes,Yes,Two year,Yes,Mailed check,111.1,6555.2,No,0,49-72 months,$90+,Yes,5,8,No,Loyal High-Value,13.2,Low
@@ -5544,7 +5544,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 2990-OGYTD,Female,No,Yes,No,67,Yes,Yes,DSL,No,Yes,Yes,Yes,Yes,Yes,Two year,No,Bank transfer (automatic),86.15,5883.85,No,0,49-72 months,$70-89,Yes,5,8,No,Loyal High-Value,8.3,Low
 6646-JPPHA,Female,Yes,No,No,14,Yes,No,Fiber optic,Yes,Yes,No,No,No,No,Month-to-month,No,Electronic check,78.85,1043.8,No,0,13-24 months,$70-89,Yes,2,4,No,Fibre Flight Risks,65.2,High
 9572-MTILT,Male,No,Yes,No,59,Yes,Yes,Fiber optic,Yes,Yes,Yes,Yes,Yes,No,Month-to-month,Yes,Electronic check,106.75,6252.9,Yes,1,49-72 months,$90+,Yes,5,8,No,Fibre Flight Risks,28.1,Low
-7658-UYUQS,Male,Yes,Yes,No,21,Yes,No,Fiber optic,No,No,Yes,No,Yes,No,Month-to-month,No,Bank transfer (automatic),86.55,1857.25,No,0,13-24 months,$70-89,Yes,2,4,No,Fibre Flight Risks,60.0,Medium
+7658-UYUQS,Male,Yes,Yes,No,21,Yes,No,Fiber optic,No,No,Yes,No,Yes,No,Month-to-month,No,Bank transfer (automatic),86.55,1857.25,No,0,13-24 months,$70-89,Yes,2,4,No,Fibre Flight Risks,60.0,High
 7880-XSOJX,Male,No,No,No,4,No,No phone service,DSL,Yes,Yes,No,Yes,No,No,Month-to-month,No,Mailed check,42.4,146.4,No,0,0-6 months,$30-49,Yes,3,4,No,New and Uncommitted,30.6,Medium
 9611-CTWIH,Female,No,No,No,3,Yes,No,Fiber optic,No,No,No,No,Yes,Yes,Month-to-month,Yes,Electronic check,89.45,240.45,Yes,1,0-6 months,$70-89,Yes,2,4,No,New and Uncommitted,85.5,High
 4589-IUAJB,Male,No,Yes,No,70,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Two year,No,Bank transfer (automatic),24.25,1724.15,No,0,49-72 months,Under $30,No,0,2,Yes,Committed Essentials,2.7,Low

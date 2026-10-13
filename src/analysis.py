@@ -196,7 +196,8 @@ def main():
 
     # ---- Risk scores (out-of-fold) -----------------------------------------
     df["RiskScore"] = (oof * 100).round(1)
-    df["RiskBand"] = pd.cut(df.RiskScore, [-1, 30, 60, 101], labels=["Low", "Medium", "High"]).astype(str)
+    df["RiskBand"] = pd.cut(df.RiskScore, [0, 30, 60, 101], right=False,
+                            labels=["Low", "Medium", "High"]).astype(str)  # Low 0-29, Medium 30-59, High 60+
     F["risk_bands"] = rate_table(df, "RiskBand")
 
     # ---- Value of saving the top at-risk customers --------------------------
