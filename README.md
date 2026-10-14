@@ -45,6 +45,7 @@ python -m venv .venv
 | `portfolio/` | Case study, social media copy and chart images |
 | `reports/` | The client report as a Word document and a PDF |
 | `powerbi/` | Optional pack for rebuilding the dashboard in Power BI Desktop: data files, DAX measures, theme and build guide |
+| `video/` | Short social video explaining the dashboard: HyperFrames source and the latest render (`renders/churn-dashboard-v4.mp4`). To rebuild, run `npm install` and `npm run audio` in `video/01-churn-dashboard`, then `npm run render` (needs Node 22 and ffmpeg) |
 | `assets/` | Kuwala Analytics logo |
 
 ## Cleaning decisions

@@ -88,6 +88,47 @@ Tools: Python, pandas, scikit-learn, Plotly, Chart.js.
 
 ---
 
+## Version 4: The "who would you call" post (recommended)
+
+Post this with the video only: `video/01-churn-dashboard/renders/churn-dashboard-v4.mp4` after your voice is recorded over it in CapCut. No images (LinkedIn does not allow images and a video in the same post); the chart images are for the Version 3 post. The dashboard link is already in the text, so do not repeat it in a comment. Pick the opening frame ("Which customers are about to leave you?") as the cover image.
+
+If you could only call 1 in 5 of your customers this month, which ones would you pick?
+
+Most businesses guess. Here is what happens when you stop guessing.
+
+I analysed 7,043 telecom customers and found a business losing 1 in 4 of them in a single month. Worse, the leavers were the higher-paying customers: $74 a month, against $61 for those who stayed.
+
+That is $139,131 of monthly revenue walking out the door.
+
+Three patterns explained most of it:
+
+1. The first 6 months decide everything. 53% of new customers left. After 4 years, fewer than 10% did.
+2. Commitment protects revenue. Month-to-month customers left at 43%. On two year contracts, 3%.
+3. Support beats entertainment. Customers with online security or tech support left at about 15%. Without them, 42%. Streaming add-ons barely moved the number.
+
+Then I built a prediction model to score every customer's risk of leaving.
+
+The result: the riskiest 20% of the list contained 51% of everyone who left.
+
+So back to the question. Call those 1 in 5, and you reach half of your leavers before they go. If a retention offer kept just 30% of them, that is roughly $270,000 a year protected. (The 30% is my assumption. A real project would test it.)
+
+Everything sits in one interactive dashboard: filters, key numbers, a ranked at-risk list and six actions to take.
+
+Explore it here: https://kuwalaanalytics.github.io/telecom-churn-retention-analysis/
+
+To be clear, this is the public IBM Telco sample dataset, used to show the approach. It is not client data.
+
+Does your business know which customers are about to leave? I'd like to hear how you track it.
+
+#CustomerChurn #CustomerRetention #DataAnalytics #PredictiveAnalytics #KuwalaAnalytics
+
+**Alternative opening lines**
+
+- The customers who left were paying more than the ones who stayed. That is the part of churn most businesses miss.
+- Half of the customers about to leave were hiding in just 20% of the list. Here is how I found them.
+
+---
+
 ## Featured section description
 
 **Title:** Telecom Customer Churn and Retention Analysis: Dashboard and Prediction Model

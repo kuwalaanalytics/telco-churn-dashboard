@@ -4,3 +4,14 @@ __pycache__/
 # Source archive (the extracted CSV is in data/raw) and third-party reference images
 *.zip
 *.webp
+# Video tooling and build output
+video/.tools/
+node_modules/
+.hyperframes/
+npm-install.log
+# Video: keep the source and the latest render only. Stems are rebuilt with `npm run audio`.
+video/VIDEO_PLAYBOOK.md
+video/*/snapshots/
+video/*/assets/audio/*.wav
+video/*/renders/*
+!video/*/renders/churn-dashboard-v4.mp4

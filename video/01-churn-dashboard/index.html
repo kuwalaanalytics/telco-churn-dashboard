@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Churn dashboard explainer</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 500; font-style: normal; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; font-style: normal; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; font-style: normal; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); }
+
+      :root {
+        --ink: #081838;
+        --stay: #2f4b8f;
+        --leave: #e8590c;
+        --glow: #f8e878;
+        --page: #f2f4f8;
+        --card: #ffffff;
+        --muted: #5b6577;
+        --shadow: 0 18px 50px rgba(8, 24, 56, 0.14);
+      }
+      html, body { margin: 0; background: var(--page); }
+      body { font-family: "Inter", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .bg { position: absolute; inset: 0; background: var(--page); }
+      .clip { position: absolute; inset: 0; }
+      .inner { position: absolute; inset: 0; }
+
+      /* Safe column: x 80 to 940, centred on 510 */
+      .zone { position: absolute; left: 80px; width: 860px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .vis { top: 280px; height: 720px; }
+      .say { top: 1030px; height: 380px; }
+      .full { top: 280px; height: 1120px; }
+
+      /* Brand chip and sample label */
+      .chip { position: absolute; left: 80px; width: 860px; top: 164px; display: flex; justify-content: center; }
+      .chip-pill { display: flex; align-items: center; gap: 14px; background: var(--card); border-radius: 999px; padding: 8px 30px 8px 14px; box-shadow: 0 6px 20px rgba(8, 24, 56, 0.1); }
+      .chip-pill img { display: block; width: 58px; height: 66px; object-fit: contain; }
+      .chip-pill span { font-size: 32px; font-weight: 700; }
+      .sample { position: absolute; left: 80px; width: 860px; top: 1444px; text-align: center; font-size: 28px; font-weight: 600; color: var(--muted); }
+
+      /* Typed lines */
+      .line { position: relative; margin: 0; width: 100%; text-align: center; text-wrap: balance; font-size: 84px; font-weight: 700; line-height: 1.14; letter-spacing: -0.01em; }
+      .line.big { font-size: 124px; font-weight: 800; line-height: 1.06; letter-spacing: -0.02em; }
+      .w { display: inline-block; white-space: nowrap; }
+      .ch { opacity: 0; }
+      .ch.out { color: var(--leave); }
+      .cursor { position: absolute; left: 0; top: 0; display: block; width: 10px; height: 0.86em; margin: 0.12em 0 0 6px; background: var(--glow); border: 3px solid var(--ink); border-radius: 5px; box-sizing: content-box; opacity: 0; }
+
+      /* Scene 1 */
+      .kicker { margin: 0 0 34px; font-size: 36px; font-weight: 600; color: var(--muted); text-align: center; }
+      .q { margin: 0; width: 100%; text-align: center; text-wrap: balance; font-size: 140px; font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; }
+      .q .mark { position: relative; display: inline-block; color: var(--leave); }
+      .q .ul { position: absolute; left: 0; right: 0; bottom: -4px; display: block; height: 12px; border-radius: 6px; background: var(--leave); }
+      .q .cur { display: inline-block; width: 12px; height: 0.8em; margin-left: 10px; vertical-align: -0.06em; background: var(--glow); border: 3px solid var(--ink); border-radius: 6px; }
+
+      /* Shared pieces */
+      .pill { display: inline-block; background: var(--ink); color: #fff; font-size: 30px; font-weight: 700; padding: 10px 26px; border-radius: 999px; white-space: nowrap; }
+      .shot { display: block; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+      .shot img { display: block; width: 100%; height: auto; }
+      .tag { position: absolute; display: block; background: var(--leave); color: #fff; font-size: 40px; font-weight: 800; padding: 10px 26px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 22px rgba(232, 89, 12, 0.3); }
+      .ring { position: absolute; display: block; border: 7px solid var(--leave); border-radius: 22px; box-sizing: border-box; }
+
+      /* Scene 2 */
+      .device { position: relative; width: 760px; height: 630px; border-radius: 36px; margin-top: 22px; }
+      .device img { width: 760px; }
+
+      /* Scene 3 */
+      .people { display: flex; gap: 30px; margin-bottom: 14px; }
+      .person { display: block; width: 150px; height: 188px; }
+      .person circle, .person path { fill: none; stroke: var(--stay); stroke-width: 9; stroke-linecap: round; }
+      .people-labels { display: flex; width: 690px; margin-bottom: 30px; font-size: 32px; font-weight: 700; }
+      .people-labels .stayed { width: 510px; text-align: center; color: var(--stay); }
+      .people-labels .left { width: 180px; text-align: center; color: var(--leave); }
+      .kpi { width: 760px; border-radius: 44px; }
+      .kpi.wide { width: 820px; border-radius: 46px; }
+
+      /* Scenes 5 and 6 */
+      .chart { position: relative; width: 820px; height: 719px; }
+      .chart .shot { width: 820px; height: 719px; border-radius: 28px; }
+
+      /* Scene 7 */
+      .list { width: 820px; background: var(--card); border-radius: 36px; box-shadow: var(--shadow); padding: 36px 40px 30px; box-sizing: border-box; }
+      .list h2 { margin: 0; font-size: 44px; font-weight: 800; }
+      .list .sub { margin: 6px 0 22px; font-size: 28px; font-weight: 500; color: var(--muted); }
+      .row { position: relative; display: flex; align-items: center; gap: 22px; padding: 20px 0; border-top: 2px solid #e3e7ef; }
+      .rank { flex: none; width: 60px; height: 60px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+      .who { flex: none; width: 300px; }
+      .who b { display: block; font-size: 36px; font-weight: 700; }
+      .who span { display: block; font-size: 28px; font-weight: 500; color: var(--muted); }
+      .bar { flex: 1; height: 18px; border-radius: 9px; background: #e8ecf3; overflow: hidden; }
+      .bar i { display: block; width: 100%; height: 100%; border-radius: 9px; background: var(--leave); }
+      .score { flex: none; width: 104px; text-align: right; font-size: 42px; font-weight: 800; color: var(--leave); }
+      .list .ring { left: 16px; top: 147px; width: 788px; height: 122px; border-radius: 24px; }
+      .list .tag { right: 44px; top: 116px; font-size: 34px; }
+
+      /* Scene 8 */
+      .toprow { display: flex; gap: 16px; margin-bottom: 22px; }
+      .toprow .tag { position: static; font-size: 36px; }
+      .toprow .t-top { background: var(--ink); box-shadow: none; }
+      .gridwrap { position: relative; width: 562px; height: 562px; }
+      .dots { display: grid; grid-template-columns: repeat(10, 44px); gap: 12px; width: 548px; padding: 7px; }
+      .dot { display: block; width: 44px; height: 44px; border-radius: 50%; background: var(--stay); }
+      .gridwrap .ring { left: -8px; top: -8px; width: 578px; height: 130px; }
+      .caption { margin: 24px 0 0; font-size: 30px; font-weight: 600; color: var(--muted); text-align: center; }
+      .caption b { color: var(--leave); font-weight: 700; }
+
+      /* Scene 10 */
+      /* Top to bottom: the full logo, the social icons, the offer, the data note. */
+      .endcard { width: 860px; background: var(--card); border-radius: 44px; box-shadow: var(--shadow); padding: 60px 50px 62px; box-sizing: border-box; text-align: center; }
+      .endcard .endlogo { display: block; width: 520px; height: auto; margin: 0 auto 48px; }
+      .endcard .icons { display: flex; justify-content: center; gap: 56px; }
+      .endcard .icons img { display: block; width: 104px; height: 104px; object-fit: contain; }
+      .endcard .contact { margin: 60px auto 0; max-width: 720px; font-size: 68px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+      .endcard .demo { margin: 42px 0 0; font-size: 28px; font-weight: 600; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="40.5">
+      <div class="bg"></div>
+
+      <!-- Persistent brand chip. The data disclosure shows with the dashboard (scene 2) and again on the end card. -->
+      <div id="chip" class="clip" data-start="0" data-duration="37.5" data-track-index="8">
+        <div class="chip"><div class="chip-pill"><img src="assets/logo-bulb.png" alt="" /><span>Kuwala Analytics</span></div></div>
+      </div>
+      <div id="sample" class="clip" data-start="3" data-duration="4.3" data-track-index="9">
+        <div class="sample" id="sample-text">Demo on public IBM sample data</div>
+      </div>
+
+      <!-- 1. The question (0.0 to 3.0). Every later scene: the picture moves first, then a short pause, then the line types. -->
+      <section id="s1" class="clip" data-start="0" data-duration="3" data-track-index="1">
+        <div class="inner">
+          <div class="zone full">
+            <p class="kicker">Telecom customer churn analysis</p>
+            <h1 class="q" id="q1">
+              <span class="w">Which</span> <span class="w">customers</span> <span class="w">are</span> <span class="w">about</span> <span class="w">to</span>
+              <span class="w mark">leave<span class="ul"></span></span>
+              <span class="w">you?<span class="cur"></span></span>
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. The real dashboard (3.0 to 7.3) -->
+      <section id="s2" class="clip" data-start="3" data-duration="4.3" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <span class="pill" id="s2-pill">The live dashboard</span>
+            <div class="shot device" id="s2-device"><img id="s2-img" data-layout-allow-overflow src="assets/dashboard-portrait.png" alt="" /></div>
+          </div>
+          <div class="zone say"><p class="line" id="l2" data-text="This dashboard shows you."></p></div>
+        </div>
+      </section>
+
+      <!-- 3. One in four left (7.3 to 11.65) -->
+      <section id="s3" class="clip" data-start="7.3" data-duration="4.35" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <div class="people">
+              <svg class="person" id="p1" viewBox="0 0 120 150"><circle cx="60" cy="42" r="27" /><path d="M13 142c0-31 21-52 47-52s47 21 47 52" /></svg>
+              <svg class="person" id="p2" viewBox="0 0 120 150"><circle cx="60" cy="42" r="27" /><path d="M13 142c0-31 21-52 47-52s47 21 47 52" /></svg>
+              <svg class="person" id="p3" viewBox="0 0 120 150"><circle cx="60" cy="42" r="27" /><path d="M13 142c0-31 21-52 47-52s47 21 47 52" /></svg>
+              <svg class="person" id="p4" viewBox="0 0 120 150"><circle cx="60" cy="42" r="27" /><path d="M13 142c0-31 21-52 47-52s47 21 47 52" /></svg>
+            </div>
+            <div class="people-labels"><span class="stayed" id="s3-stayed">3 stayed</span><span class="left" id="s3-left">1 left</span></div>
+            <div class="shot kpi" id="s3-kpi"><img src="assets/kpi-churn.png" alt="" /></div>
+          </div>
+          <div class="zone say"><p class="line" id="l3" data-text="1 in 4 customers {left} in one month."></p></div>
+        </div>
+      </section>
+
+      <!-- 4. The revenue that went with them (11.65 to 15.55) -->
+      <section id="s4" class="clip" data-start="11.65" data-duration="3.9" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis"><div class="shot kpi wide" id="s4-kpi"><img src="assets/kpi-revenue.png" alt="" /></div></div>
+          <div class="zone say"><p class="line" id="l4" data-text="$139,000 a month, {gone.}"></p></div>
+        </div>
+      </section>
+
+      <!-- 5. Contract (15.55 to 19.95) -->
+      <section id="s5" class="clip" data-start="15.55" data-duration="4.4" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <div class="chart" id="s5-chart">
+              <div class="shot"><img src="assets/chart-contract.png" alt="" /></div>
+              <span class="ring" id="s5-ring" style="left: 146px; top: 250px; width: 158px; height: 392px"></span>
+              <span class="tag" id="s5-tag" style="left: 326px; top: 258px">43% leave</span>
+            </div>
+          </div>
+          <div class="zone say"><p class="line" id="l5" data-text="Month to month customers {leave} most."></p></div>
+        </div>
+      </section>
+
+      <!-- 6. Tenure (19.95 to 23.8) -->
+      <section id="s6" class="clip" data-start="19.95" data-duration="3.85" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <div class="chart" id="s6-chart">
+              <div class="shot"><img src="assets/chart-tenure.png" alt="" /></div>
+              <span class="ring" id="s6-ring" style="left: 118px; top: 196px; width: 136px; height: 136px; border-radius: 50%"></span>
+              <span class="tag" id="s6-tag" style="left: 270px; top: 168px; font-size: 36px">53% in the first 6 months</span>
+            </div>
+          </div>
+          <div class="zone say"><p class="line" id="l6" data-text="New customers {leave} fastest."></p></div>
+        </div>
+      </section>
+
+      <!-- 7. The ranked list (23.8 to 28.4) -->
+      <section id="s7" class="clip" data-start="23.8" data-duration="4.6" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <div class="list" id="s7-list">
+              <h2>Top at risk customers</h2>
+              <p class="sub">Ranked by risk score, 0 to 100</p>
+              <div class="row" id="r1"><span class="rank">1</span><span class="who"><b>4912-PIGUY</b><span>Month to month</span></span><span class="bar"><i style="width: 94.7%"></i></span><span class="score">94.7</span></div>
+              <div class="row" id="r2"><span class="rank">2</span><span class="who"><b>0021-IKXGC</b><span>Month to month</span></span><span class="bar"><i style="width: 94.2%"></i></span><span class="score">94.2</span></div>
+              <div class="row" id="r3"><span class="rank">3</span><span class="who"><b>7439-DKZTW</b><span>Month to month</span></span><span class="bar"><i style="width: 94%"></i></span><span class="score">94.0</span></div>
+              <div class="row" id="r4"><span class="rank">4</span><span class="who"><b>1452-VOQCH</b><span>Month to month</span></span><span class="bar"><i style="width: 93.6%"></i></span><span class="score">93.6</span></div>
+              <span class="ring" id="s7-ring"></span>
+              <span class="tag" id="s7-tag">Call first</span>
+            </div>
+          </div>
+          <div class="zone say"><p class="line" id="l7" data-text="It ranks who to call first."></p></div>
+        </div>
+      </section>
+
+      <!-- 8. Top 20% holds half the leavers (28.4 to 34.2) -->
+      <section id="s8" class="clip" data-start="28.4" data-duration="5.8" data-track-index="1">
+        <div class="inner">
+          <div class="zone vis">
+            <div class="toprow">
+              <span class="tag t-top" id="s8-top">Top 20% by risk score</span>
+              <span class="tag t-half" id="s8-half">51% of leavers</span>
+            </div>
+            <div class="gridwrap" id="s8-grid">
+              <div class="dots" id="dots"></div>
+              <span class="ring" id="s8-ring"></span>
+            </div>
+            <p class="caption" id="s8-cap">Each dot is 1% of customers. <b>Orange left.</b></p>
+          </div>
+          <div class="zone say"><p class="line" id="l8" data-text="The top 20% holds half the {leavers.}"></p></div>
+        </div>
+      </section>
+
+      <!-- 9. The ask (34.2 to 37.5) -->
+      <section id="s9" class="clip" data-start="34.2" data-duration="3.3" data-track-index="1">
+        <div class="inner">
+          <div class="zone full"><p class="line big" id="l9" data-text="Do you know who is about to {leave?}"></p></div>
+        </div>
+      </section>
+
+      <!-- 10. End card (37.5 to 40.5) -->
+      <section id="s10" class="clip" data-start="37.5" data-duration="3" data-track-index="1">
+        <div class="inner">
+          <div class="zone full">
+            <div class="endcard" id="end">
+              <img class="endlogo" src="assets/logo-full.png" alt="Kuwala Analytics" />
+              <div class="icons">
+                <img id="ic1" src="assets/icons/linkedin.svg" alt="LinkedIn" />
+                <img id="ic2" src="assets/icons/facebook.svg" alt="Facebook" />
+                <img id="ic3" src="assets/icons/instagram.svg" alt="Instagram" />
+              </div>
+              <p class="contact" id="end-line">Contact us for your data needs</p>
+              <p class="demo" id="end-demo">Demo on public IBM sample data</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sound: music and effects only. The voice is recorded afterwards. -->
+      <audio id="music" src="assets/audio/music.wav" data-start="0" data-duration="40.5" data-track-index="20" data-volume="1"></audio>
+      <audio id="sfx" src="assets/audio/sfx.wav" data-start="0" data-duration="40.5" data-track-index="21" data-volume="1"></audio>
+    </div>
+
+    <!-- Every time in the video, in seconds. scripts/gen-audio.mjs reads this block too, so sound and picture stay in step.
+         Clip windows (data-start, data-duration) above must match "ends". -->
+    <script type="application/json" id="timing">
+      {
+        "duration": 40.5,
+        "cps": 14,
+        "ends": { "s1": 3.0, "s2": 7.3, "s3": 11.65, "s4": 15.55, "s5": 19.95, "s6": 23.8, "s7": 28.4, "s8": 34.2, "s9": 37.5, "s10": 40.5 },
+        "lines": { "l2": 5.0, "l3": 8.6, "l4": 12.4, "l5": 16.85, "l6": 21.25, "l7": 25.9, "l8": 31.15, "l9": 34.35 },
+        "at": {
+          "s1Mark": 0.35,
+          "s2In": 3.05, "s2Pan": 3.55,
+          "s3In": 7.35, "s3Left": 7.95,
+          "s4In": 11.7,
+          "s5In": 15.6, "s5Mark": 16.15,
+          "s6In": 20.0, "s6Mark": 20.55,
+          "s7In": 23.85, "s7Rows": 24.3, "s7Mark": 25.2,
+          "s8In": 28.45, "s8Box": 29.0, "s8Top": 29.45, "s8Rest": 29.95, "s8Half": 30.5,
+          "endIn": 37.55, "endIcons": 38.1, "endLine": 38.7, "endDemo": 38.95
+        }
+      }
+    </script>
+    <script>
+      (function () {
+        var T = JSON.parse(document.getElementById("timing").textContent);
+        var A = T.at, L = T.lines, E = T.ends, CPS = T.cps;
+        var LEAVE = "#e8590c";
+
+        // Lay a line out in full (every letter present but invisible) so centred text never jumps,
+        // keep each word unbreakable, and return the letters in typing order.
+        function buildLine(el) {
+          var text = el.getAttribute("data-text");
+          var out = false, word = null, steps = [];
+          el.textContent = "";
+          for (var i = 0; i < text.length; i++) {
+            var c = text[i];
+            if (c === "{") { out = true; continue; }
+            if (c === "}") { out = false; continue; }
+            if (c === " ") { word = null; el.appendChild(document.createTextNode(" ")); steps.push(null); continue; }
+            if (!word) { word = document.createElement("span"); word.className = "w"; el.appendChild(word); }
+            var s = document.createElement("span");
+            s.className = out ? "ch out" : "ch";
+            s.textContent = c;
+            word.appendChild(s);
+            steps.push(s);
+          }
+          var cur = document.createElement("span");
+          cur.className = "cursor";
+          el.appendChild(cur);
+          return { steps: steps, cur: cur };
+        }
+
+        function build() {
+          var tl = gsap.timeline({ paused: true });
+
+          function rise(sel, t, y, d) {
+            tl.fromTo(sel, { y: y == null ? 50 : y, opacity: 0 }, { y: 0, opacity: 1, duration: d || 0.42, ease: "power3.out" }, t);
+          }
+          function pop(sel, t) {
+            tl.fromTo(sel, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "power3.out" }, t);
+          }
+          function mark(sel, t, from) {
+            tl.fromTo(sel, { scale: from || 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "power3.out" }, t);
+          }
+          function exit(id) {
+            tl.to("#" + id + " .inner", { opacity: 0, duration: 0.25, ease: "power1.in" }, E[id] - 0.25);
+          }
+          // Type a line once the picture has settled. Nothing else moves while it types.
+          function type(id, scene) {
+            var t = L[id];
+            var line = buildLine(document.getElementById(id));
+            var first = null, end = t;
+            line.steps.forEach(function (s, i) {
+              if (!s) return;
+              if (!first) first = s;
+              var at = t + i / CPS;
+              tl.set(s, { opacity: 1 }, at);
+              tl.set(line.cur, { x: s.offsetLeft + s.offsetWidth, y: s.offsetTop }, at);
+              end = at;
+            });
+            gsap.set(line.cur, { x: first.offsetLeft, y: first.offsetTop });
+            tl.set(line.cur, { opacity: 1 }, t - 0.05);
+            // Blink the cursor once the line is complete.
+            for (var b = end + 0.3, on = false; b < E[scene] - 0.3; b += 0.3, on = !on) {
+              tl.set(line.cur, { opacity: on ? 1 : 0 }, b);
+            }
+          }
+
+          // 1. The question is on screen from the first frame.
+          tl.fromTo("#s1 .ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", transformOrigin: "left center" }, A.s1Mark);
+          tl.fromTo("#q1", { scale: 1 }, { scale: 1.03, duration: 3, ease: "none" }, 0);
+          [0.6, 1.2, 1.8, 2.4].forEach(function (t, i) { tl.set("#s1 .cur", { opacity: i % 2 ? 1 : 0 }, t); });
+          exit("s1");
+
+          // 2. The real dashboard rises, pans down and stops. Then the line types.
+          rise("#s2-pill", A.s2In, 30, 0.35);
+          rise("#s2-device", A.s2In + 0.05, 70, 0.45);
+          tl.fromTo("#s2-img", { y: 0 }, { y: -360, duration: 1.1, ease: "power2.inOut" }, A.s2Pan);
+          type("l2", "s2");
+          exit("s2");
+          tl.to("#sample-text", { opacity: 0, duration: 0.25, ease: "power1.in" }, E.s2 - 0.25);
+
+          // 3. Four people and the churn rate card arrive together, then the fourth person leaves.
+          ["#p1", "#p2", "#p3", "#p4"].forEach(function (p, i) { pop(p, A.s3In + i * 0.06); });
+          rise("#s3-kpi", A.s3In, 50, 0.42);
+          tl.to("#p4 circle, #p4 path", { stroke: LEAVE, duration: 0.2 }, A.s3Left);
+          tl.to("#p4", { y: -16, duration: 0.25, ease: "power2.out" }, A.s3Left);
+          rise("#s3-stayed", A.s3Left, 16, 0.3);
+          rise("#s3-left", A.s3Left, 16, 0.3);
+          type("l3", "s3");
+          exit("s3");
+
+          // 4. The revenue card lands and stays still.
+          tl.fromTo("#s4-kpi", { scale: 0.86, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, A.s4In);
+          type("l4", "s4");
+          exit("s4");
+
+          // 5. Contract chart, then the ring and tag on the month to month bar.
+          rise("#s5-chart .shot", A.s5In, 60, 0.42);
+          mark("#s5-ring", A.s5Mark, 1.18);
+          pop("#s5-tag", A.s5Mark + 0.05);
+          type("l5", "s5");
+          exit("s5");
+
+          // 6. Tenure chart, then the ring and tag on the first six months.
+          rise("#s6-chart .shot", A.s6In, 60, 0.42);
+          mark("#s6-ring", A.s6Mark, 1.4);
+          pop("#s6-tag", A.s6Mark + 0.05);
+          type("l6", "s6");
+          exit("s6");
+
+          // 7. The ranked list. Rows land in rank order, then row 1 is ringed.
+          rise("#s7-list", A.s7In, 60, 0.4);
+          ["#r1", "#r2", "#r3", "#r4"].forEach(function (r, i) {
+            tl.fromTo(r, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, A.s7Rows + i * 0.12);
+            tl.fromTo(r + " .bar i", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.out", transformOrigin: "left center" }, A.s7Rows + 0.05 + i * 0.12);
+          });
+          mark("#s7-ring", A.s7Mark, 1.06);
+          pop("#s7-tag", A.s7Mark + 0.05);
+          type("l7", "s7");
+          exit("s7");
+
+          // 8. The top 20% by risk holds about half of the leavers (51%).
+          var dots = document.getElementById("dots");
+          var leavers = {
+            0: [0, 1, 2, 3, 5, 6, 8], 1: [0, 2, 3, 5, 7, 9],
+            2: [1, 4, 8], 3: [0, 5, 7], 4: [2, 6], 5: [3, 9], 6: [5], 7: [1], 8: [7]
+          };
+          var topLeavers = [], restLeavers = [];
+          for (var r = 0; r < 10; r++) {
+            for (var c = 0; c < 10; c++) {
+              var d = document.createElement("span");
+              d.className = "dot";
+              dots.appendChild(d);
+              if (leavers[r] && leavers[r].indexOf(c) >= 0) (r < 2 ? topLeavers : restLeavers).push(d);
+            }
+          }
+          rise("#dots", A.s8In, 40, 0.4);
+          rise("#s8-cap", A.s8In + 0.05, 20, 0.35);
+          mark("#s8-ring", A.s8Box, 1.08);
+          pop("#s8-top", A.s8Box + 0.05);
+          tl.to(topLeavers, { backgroundColor: LEAVE, duration: 0.2, stagger: 0.02 }, A.s8Top);
+          tl.to(restLeavers, { backgroundColor: LEAVE, duration: 0.2, stagger: 0.02 }, A.s8Rest);
+          pop("#s8-half", A.s8Half);
+          type("l8", "s8");
+          exit("s8");
+
+          // 9. The ask.
+          type("l9", "s9");
+          exit("s9");
+
+          // 10. End card: the full logo, then the social icons, the offer and the data note.
+          rise("#end", A.endIn, 50, 0.45);
+          ["#ic1", "#ic2", "#ic3"].forEach(function (ic, i) { pop(ic, A.endIcons + i * 0.1); });
+          rise("#end-line", A.endLine, 24, 0.35);
+          rise("#end-demo", A.endDemo, 16, 0.3);
+
+          window.__timelines["main"] = tl;
+          if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+        }
+
+        // Letter positions depend on the font, so build only once every weight has loaded.
+        Promise.all(["500", "600", "700", "800"].map(function (w) { return document.fonts.load(w + " 84px Inter"); }))
+          .then(function () { return document.fonts.ready; })
+          .then(build);
+      })();
+    </script>
+  </body>
+</html>
